@@ -9,7 +9,7 @@
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
-                src="../../assets/images/icons/buildings-2-black.svg"
+                src="@/assets/images/icons/buildings-2-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -27,7 +27,7 @@
           >
             Add New
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />

@@ -39,7 +39,7 @@
             class="flex items-center gap-1 font-medium text-lg text-monday-gray"
           >
             <img
-              src="../../assets/images/icons/call-grey.svg"
+              src="@/assets/images/icons/call-grey.svg"
               class="size-6 flex shrink-0"
               alt="icon"
             />
@@ -49,7 +49,7 @@
         <div class="flex flex-col gap-2 flex-1">
           <p class="flex items-center gap-1 font-medium text-monday-gray">
             <img
-              src="../../assets/images/icons/user-grey.svg"
+              src="@/assets/images/icons/user-grey.svg"
               class="size-4 flex shrink-0"
               alt="icon"
             />
@@ -72,7 +72,7 @@
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
-                src="../../assets/images/icons/buildings-2-black.svg"
+                src="@/assets/images/icons/buildings-2-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -90,7 +90,7 @@
           >
             Assign a Products
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />
@@ -203,7 +203,7 @@
             class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="../../assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -233,7 +233,7 @@
           class="flex size-14 rounded-full items-center justify-center bg-monday-gray-background"
         >
           <img
-            src="../../assets/images/icons/close-circle-black.svg"
+            src="@/assets/images/icons/close-circle-black.svg"
             class="size-6"
             alt="icon"
           />

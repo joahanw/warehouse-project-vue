@@ -13,10 +13,7 @@
           class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
         >
           <img
-            :src="
-              warehouse.photo ||
-              '../../src/assets/images/icons/gallery-grey.svg'
-            "
+            :src="warehouse.photo || defaultGalleryIcon"
             class="size-full object-contain"
             alt="icon"
           />
@@ -27,7 +24,7 @@
             class="flex items-center gap-1 font-medium text-lg text-monday-gray"
           >
             <img
-              src="../../assets/images/icons/call-grey.svg"
+              src="@/assets/images/icons/call-grey.svg"
               class="size-6 flex shrink-0"
               alt="icon"
             />
@@ -62,7 +59,7 @@
           >
             Assign a Products
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />
@@ -78,7 +75,7 @@
             class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="/src/assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -156,7 +153,7 @@
             class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="../../assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -185,7 +182,7 @@
             class="flex size-14 rounded-full items-center justify-center bg-monday-gray-background"
           >
             <img
-              src="/src/assets/images/icons/close-circle-black.svg"
+              src="@/assets/images/icons/close-circle-black.svg"
               class="size-6"
               alt="icon"
             />
@@ -251,7 +248,7 @@
           class="flex size-14 rounded-full items-center justify-center bg-monday-gray-background"
         >
           <img
-            src="../../assets/images/icons/close-circle-black.svg"
+            src="@/assets/images/icons/close-circle-black.svg"
             class="size-6"
             alt="icon"
           />
@@ -264,7 +261,7 @@
           <div class="flex flex-col gap-2">
             <p class="flex items-center gap-[6px] font-semibold text-lg">
               <img
-                src="../../assets/images/icons/printer-black.svg"
+                src="@/assets/images/icons/printer-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -277,7 +274,7 @@
             class="flex size-[100px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
           >
             <img
-              src="../../assets/images/thumbnails/printer.png"
+              src="@/assets/images/thumbnails/printer.png"
               class="size-full object-contain"
               alt="icon"
             />
@@ -298,6 +295,7 @@
 </template>
 
 <script>
+import defaultGalleryIcon from "@/assets/images/icons/gallery-grey.svg";
 import Layout from "@/components/Layout.vue";
 import { getWarehouseProductByWarehouseId } from "@/js/api/warehouse";
 
@@ -308,6 +306,7 @@ export default {
   },
   data() {
     return {
+      defaultGalleryIcon,
       warehouse: {
         id: null,
         name: "",

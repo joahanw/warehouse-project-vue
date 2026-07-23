@@ -9,7 +9,7 @@
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
-                src="../../assets/images/icons/buildings-2-black.svg"
+                src="@/assets/images/icons/buildings-2-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -27,7 +27,7 @@
           >
             Add New
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />
@@ -44,7 +44,7 @@
             class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="/src/assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -61,10 +61,7 @@
                     class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
-                      :src="
-                        warehouse.photo ||
-                        '../../src/assets/images/icons/gallery-grey.svg'
-                      "
+                      :src="warehouse.photo || defaultGalleryIcon"
                       class="size-full object-contain"
                       alt="icon"
                     />
@@ -116,7 +113,7 @@
             class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="../../assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -131,6 +128,7 @@
 </template>
 
 <script>
+import defaultGalleryIcon from "@/assets/images/icons/gallery-grey.svg";
 import Layout from "@/components/Layout.vue";
 import { getWarehouses } from "@/js/api/warehouse";
 export default {
@@ -140,6 +138,7 @@ export default {
   },
   data() {
     return {
+      defaultGalleryIcon,
       warehouses: [],
       totalRecords: 0,
     };

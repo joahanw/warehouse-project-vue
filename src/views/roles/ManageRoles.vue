@@ -9,7 +9,7 @@
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
-                src="../../assets/images/icons/profile-circle-black.svg"
+                src="@/assets/images/icons/profile-circle-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -22,7 +22,7 @@
           <router-link to="/add-roles" class="btn btn-primary font-semibold">
             Add New
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />
@@ -132,7 +132,7 @@
             class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="../../assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />

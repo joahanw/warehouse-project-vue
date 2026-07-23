@@ -10,7 +10,7 @@
             class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
           >
             <img
-              src="../assets/images/icons/wallet-blue-fill.svg"
+              src="@/assets/images/icons/wallet-blue-fill.svg"
               class="size-6"
               alt="icon"
             />
@@ -30,7 +30,7 @@
             class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
           >
             <img
-              src="../assets/images/icons/document-text-blue-fill.svg"
+              src="@/assets/images/icons/document-text-blue-fill.svg"
               class="size-6"
               alt="icon"
             />
@@ -52,7 +52,7 @@
             class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
           >
             <img
-              src="../assets/images/icons/bag-blue-fill.svg"
+              src="@/assets/images/icons/bag-blue-fill.svg"
               class="size-6"
               alt="icon"
             />
@@ -73,7 +73,7 @@
                 class="flex size-14 rounded-full bg-monday-lime-green items-center justify-center overflow-hidden"
               >
                 <img
-                  src="../assets/images/icons/crown-black-fill.svg"
+                  src="@/assets/images/icons/crown-black-fill.svg"
                   class="size-6"
                   alt="icon"
                 />
@@ -99,7 +99,7 @@
               >
                 <p class="font-semibold">Upgrade Now</p>
                 <img
-                  src="../assets/images/icons/arrow-right-black.svg"
+                  src="@/assets/images/icons/arrow-right-black.svg"
                   class="flex size-6 shrink-0"
                   alt="icon"
                 />
@@ -111,7 +111,7 @@
               class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
             >
               <img
-                src="../assets/images/icons/receive-square-blue-fill.svg"
+                src="@/assets/images/icons/receive-square-blue-fill.svg"
                 class="size-6"
                 alt="icon"
               />
@@ -129,7 +129,7 @@
               >
                 <p class="font-semibold text-monday-blue">Download Now</p>
                 <img
-                  src="../assets/images/icons/arrow-right-blue.svg"
+                  src="@/assets/images/icons/arrow-right-blue.svg"
                   class="flex size-6 shrink-0"
                   alt="icon"
                 />
@@ -205,8 +205,8 @@
                   <img
                     :src="
                       expandedTransaction.includes(index + 1)
-                        ? '@/assets/images/icons/arrow-circle-down.svg'
-                        : '/src/assets/images/icons/arrow-circle-up.svg'
+                        ? arrowCircleDownIcon
+                        : arrowCircleUpIcon
                     "
                     class="size-6 flex shrink-0 transition-300"
                     alt="icon"
@@ -250,7 +250,7 @@
                         :src="product.product.category?.name"
                         class="size-6 flex shrink-0"
                         alt="icon"
-                        onerror="this.src = '/src/assets/images/icons/box-grey.svg'"
+                        @error="(e) => (e.target.src = boxGreyIcon)"
                       />
                       <p class="font-semibold text-lg text-nowrap">
                         {{ product.product.category?.name || "Uncategorized" }}
@@ -340,7 +340,7 @@
                   :src="selectedProduct.product.category?.photo"
                   class="size-6 flex shrink-0"
                   alt="icon"
-                  onerror="this.src = '/src/assets/images/icons/box-grey.svg'"
+                  @error="(e) => (e.target.src = boxGreyIcon)"
                 />
                 {{ selectedProduct.product.category?.name || "Uncategorized" }}
               </p>
@@ -361,7 +361,7 @@
                 :src="selectedProduct.product.thumbnail"
                 class="size-full object-contain"
                 alt="product"
-                onerror="this.src = '/src/assets/images/icons/gallery-default.svg'"
+                @error="(e) => (e.target.src = galleryDefaultIcon)"
               />
             </div>
           </div>
@@ -389,6 +389,10 @@
 </template>
 
 <script>
+import arrowCircleDownIcon from "@/assets/images/icons/arrow-circle-down.svg";
+import arrowCircleUpIcon from "@/assets/images/icons/arrow-circle-up.svg";
+import boxGreyIcon from "@/assets/images/icons/box-grey.svg";
+import galleryDefaultIcon from "@/assets/images/icons/gallery-default.svg";
 import Layout from "@/components/Layout.vue";
 import { getDashboardData, getTransactions } from "@/js/api/transaction";
 
@@ -399,6 +403,10 @@ export default {
   },
   data() {
     return {
+      arrowCircleDownIcon,
+      arrowCircleUpIcon,
+      boxGreyIcon,
+      galleryDefaultIcon,
       dashboardData: {
         totalRevenue: 0,
         totalTransactions: 0,

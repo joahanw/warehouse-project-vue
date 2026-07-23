@@ -16,12 +16,8 @@
               class="group relative flex size-[100px] rounded-2xl overflow-hidden items-center justify-center bg-monday-background"
             >
               <img
-                :src="
-                  photoPreview ||
-                  user.photo ||
-                  '/src/assets/images/photos/photos-2.png'
-                "
-                data-default="../../assets/images/icons/gallery-default.svg"
+                :src="photoPreview || user.photo || defaultUserPhoto"
+                data-default="@/assets/images/icons/gallery-default.svg"
                 class="size-full object-contain"
                 alt="icon"
               />
@@ -44,33 +40,33 @@
           <FormInput
             v-model="form.name"
             label="Full Name"
-            icon="../../src/assets/images/icons/profile-grey.svg"
+            :icon="profileGreyIcon"
             required="true"
           />
           <FormInput
             v-model="form.phone"
             label="Phone Number"
-            icon="../../src/assets/images/icons/call-grey.svg"
+            :icon="callGreyIcon"
             type="tel"
             required="true"
           />
           <FormInput
             v-model="form.email"
             label="Email Address"
-            icon="../../src/assets/images/icons/sms-grey.svg"
+            :icon="smsGreyIcon"
             type="email"
             required="true"
           />
           <FormInput
             v-model="form.password"
             label="Password"
-            icon="../../src/assets/images/icons/key-grey.svg"
+            :icon="keyGreyIcon"
             type="password"
           />
           <FormInput
             v-model="form.passwordConfirmation"
             label="PasswordConfirmation"
-            icon="../../src/assets/images/icons/key-grey.svg"
+            :icon="keyGreyIcon"
             type="password"
           />
 
@@ -94,7 +90,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -105,7 +101,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -115,7 +111,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -126,7 +122,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -136,7 +132,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -158,6 +154,11 @@ import FormInput from "@/components/FormInput.vue";
 import { useRoute, useRouter } from "vue-router";
 import { onMounted, reactive, ref } from "vue";
 import { getUserById, updateUser, uploadUserImage } from "@/js/api/users";
+import defaultUserPhoto from "@/assets/images/photos/photos-2.png";
+import profileGreyIcon from "@/assets/images/icons/profile-grey.svg";
+import callGreyIcon from "@/assets/images/icons/call-grey.svg";
+import smsGreyIcon from "@/assets/images/icons/sms-grey.svg";
+import keyGreyIcon from "@/assets/images/icons/key-grey.svg";
 
 export default {
   name: "EditUsers",
@@ -312,6 +313,11 @@ export default {
       showPasswordConfirmation,
       handlePhotoUpload,
       handleSubmit,
+      defaultUserPhoto,
+      profileGreyIcon,
+      callGreyIcon,
+      smsGreyIcon,
+      keyGreyIcon,
     };
   },
 };

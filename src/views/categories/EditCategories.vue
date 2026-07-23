@@ -22,7 +22,7 @@
         class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-red-300 gap-6"
       >
         <img
-          src="/src/assets/images/icons/close-circle-black.svg"
+          src="@/assets/images/icons/close-circle-black.svg"
           class="size-[52px]"
           alt="icon"
         />
@@ -45,7 +45,7 @@
               <img
                 id="Thumbnail"
                 :src="imagePreview || getCategoryIcon(category.photo)"
-                data-original="../../src/assets/images/icons/weight-black.svg"
+                data-original="@/assets/images/icons/weight-black.svg"
                 class="size-14 object-contain"
                 alt="icon"
               />
@@ -80,13 +80,13 @@
           <FormInput
             v-model="form.name"
             label="Category Name"
-            icon="../../src/assets/images/icons/note-2-grey.svg"
+            :icon="note2GreyIcon"
             required="true"
           />
           <FormInput
             v-model="form.tagline"
             label="Category Tagline"
-            icon="../../src/assets/images/icons/document-grey.svg"
+            :icon="documentGreyIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -103,7 +103,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -113,7 +113,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -124,7 +124,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -135,7 +135,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -146,7 +146,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -169,6 +169,8 @@ import {
   updateCategory,
   uploadCategoryImage,
 } from "@/js/api/products";
+import note2GreyIcon from "@/assets/images/icons/note-2-grey.svg";
+import documentGreyIcon from "@/assets/images/icons/document-grey.svg";
 export default {
   name: "EditCategories",
   components: {
@@ -196,6 +198,8 @@ export default {
       isUploading: false,
       error: "",
       loading: false,
+      note2GreyIcon,
+      documentGreyIcon,
     };
   },
   async created() {

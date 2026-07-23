@@ -17,10 +17,7 @@
             >
               <img
                 id="Thumbnail"
-                :src="
-                  imagePreview ||
-                  '../../src/assets/images/icons/gallery-grey.svg'
-                "
+                :src="imagePreview || galleryGreyIcon"
                 class="size-14 object-contain"
                 alt="icon"
               />
@@ -65,13 +62,13 @@
           <FormInput
             v-model="form.name"
             label="Category Name"
-            icon="../../src/assets/images/icons/note-2-grey.svg"
+            :icon="note2GreyIcon"
             required="true"
           />
           <FormInput
             v-model="form.tagline"
             label="Category Tagline"
-            icon="../../src/assets/images/icons/document-grey.svg"
+            :icon="documentGreyIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -100,7 +97,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -110,7 +107,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -120,7 +117,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -130,7 +127,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -140,7 +137,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -159,6 +156,9 @@
 import Layout from "@/components/Layout.vue";
 import FormInput from "@/components/FormInput.vue";
 import { uploadCategoryImage, createCategory } from "@/js/api/products";
+import galleryGreyIcon from "@/assets/images/icons/gallery-grey.svg";
+import note2GreyIcon from "@/assets/images/icons/note-2-grey.svg";
+import documentGreyIcon from "@/assets/images/icons/document-grey.svg";
 
 export default {
   name: "AddCategories",
@@ -178,6 +178,9 @@ export default {
       uploadProgress: 0,
       isSubmitting: false,
       isUploading: false,
+      galleryGreyIcon,
+      note2GreyIcon,
+      documentGreyIcon,
     };
   },
 

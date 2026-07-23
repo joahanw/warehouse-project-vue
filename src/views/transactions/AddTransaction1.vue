@@ -76,27 +76,27 @@
           <FormInput
             v-model="formData.customerName"
             label="Customer Name"
-            icon="../src/assets/images/icons/user-thin-grey.svg"
+            :icon="userThinGreyIcon"
             required="true"
           />
           <FormInput
             v-model="formData.phoneNumber"
             label="Phone Number"
-            icon="../src/assets/images/icons/call-grey.svg"
+            :icon="callGreyIcon"
             required="true"
             type="tel"
           />
           <FormInput
             v-model="formData.email"
             label="Email Address"
-            icon="../../src/assets/images/icons/sms-grey.svg"
+            :icon="smsGreyIcon"
             type="email"
             required="true"
           />
           <FormInput
             v-model="formData.shippingCost"
             label="Shipping Cost"
-            icon="../../src/assets/images/icons/moneys-grey.svg"
+            :icon="moneysGreyIcon"
             required="true"
             type="number"
             min="0"
@@ -105,13 +105,13 @@
           <FormInput
             v-model="formData.notes"
             label="Notes"
-            icon="../../src/assets/images/icons/note-2-grey.svg"
+            :icon="note2GreyIcon"
             required="true"
           />
           <FormTextarea
             v-model="formData.address"
             label="Customer Address"
-            icon="../../src/assets/images/icons/location-grey.svg"
+            :icon="locationGreyIcon"
             required="true"
           />
 
@@ -179,6 +179,12 @@
 </template>
 
 <script setup>
+import callGreyIcon from "@/assets/images/icons/call-grey.svg";
+import locationGreyIcon from "@/assets/images/icons/location-grey.svg";
+import moneysGreyIcon from "@/assets/images/icons/moneys-grey.svg";
+import note2GreyIcon from "@/assets/images/icons/note-2-grey.svg";
+import smsGreyIcon from "@/assets/images/icons/sms-grey.svg";
+import userThinGreyIcon from "@/assets/images/icons/user-thin-grey.svg";
 import LayoutMerchant from "@/components/LayoutMerchant.vue";
 import { getMerchants } from "@/js/api/merchants";
 import { useAuthStore } from "@/stores/auth";

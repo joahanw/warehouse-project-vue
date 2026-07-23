@@ -18,7 +18,7 @@
               <img
                 id="Thumbnail"
                 :src="imagePreview || warehouse.photo"
-                data-original="../../assets/images/thumbnails/warehouse-1.png"
+                data-original="@/assets/images/thumbnails/warehouse-1.png"
                 class="size-full object-contain"
                 alt="icon"
               />
@@ -67,20 +67,20 @@
           <FormInput
             v-model="form.name"
             label="Warehouse Name"
-            icon="../../src/assets/images/icons/buildings-2-grey.svg"
+            :icon="buildingsIcon"
             required="true"
           />
           <FormInput
             v-model="form.phone"
             label="Phone Number"
-            icon="../../src/assets/images/icons/call-grey.svg"
+            :icon="callIcon"
             required="true"
             type="tel"
           />
           <FormTextarea
             v-model="form.address"
             label="Warehouse Address"
-            icon="../../src/assets/images/icons/location-grey.svg"
+            :icon="locationIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -97,7 +97,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -107,7 +107,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -117,7 +117,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -128,7 +128,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -138,7 +138,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -154,6 +154,9 @@
 </template>
 
 <script>
+import buildingsIcon from "@/assets/images/icons/buildings-2-grey.svg";
+import callIcon from "@/assets/images/icons/call-grey.svg";
+import locationIcon from "@/assets/images/icons/location-grey.svg";
 import Layout from "@/components/Layout.vue";
 import FormInput from "@/components/FormInput.vue";
 import FormTextarea from "@/components/FormTextarea.vue";
@@ -172,6 +175,9 @@ export default {
   },
   data() {
     return {
+      buildingsIcon,
+      callIcon,
+      locationIcon,
       warehouse: {
         id: null,
         name: "",

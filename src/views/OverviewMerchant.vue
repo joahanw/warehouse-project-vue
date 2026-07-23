@@ -199,8 +199,8 @@
                 <img
                   :src="
                     expandedSections.includes(index + 1)
-                      ? '/src/assets/images/icons/arrow-circle-down.svg'
-                      : '/src/assets/images/icons/arrow-circle-up.svg'
+                      ? arrowCircleDownIcon
+                      : arrowCircleUpIcon
                   "
                   class="size-6 flex shrink-0 transition-300"
                   alt="icon"
@@ -244,7 +244,7 @@
                       :src="product.product.category?.photo"
                       class="size-6 flex shrink-0"
                       alt="icon"
-                      onerror="this.src='/src/assets/images/icons/box-grey.svg'"
+                      @error="(e) => (e.target.src = boxGreyIcon)"
                     />
                     <p class="font-semibold text-lg text-nowrap">
                       {{ product.product.category?.name || "Uncategorized" }}
@@ -336,7 +336,7 @@
                 :src="selectedProduct.product.category?.photo"
                 class="size-6 flex shrink-0"
                 alt="icon"
-                onerror="this.src='/src/assets/images/icons/box-grey.svg'"
+                @error="(e) => (e.target.src = boxGreyIcon)"
               />
               {{ selectedProduct.product.category?.name || "Uncategorized" }}
             </p>
@@ -355,7 +355,7 @@
               :src="selectedProduct.product.thumbnail"
               class="size-full object-contain"
               alt="product"
-              onerror="this.src='/src/assets/images/icons/gallery-default.svg'"
+              @error="(e) => (e.target.src = galleryDefaultIcon)"
             />
           </div>
         </div>
@@ -382,6 +382,10 @@
 </template>
 
 <script setup>
+import arrowCircleDownIcon from "@/assets/images/icons/arrow-circle-down.svg";
+import arrowCircleUpIcon from "@/assets/images/icons/arrow-circle-up.svg";
+import boxGreyIcon from "@/assets/images/icons/box-grey.svg";
+import galleryDefaultIcon from "@/assets/images/icons/gallery-default.svg";
 import LayoutMerchant from "@/components/LayoutMerchant.vue";
 import { getFirstMerchantFromStorage } from "@/js/api";
 import { getDashboardData, getTransactions } from "@/js/api/transaction";

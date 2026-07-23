@@ -57,7 +57,7 @@
             <FormSelect
               v-model="form.productId"
               label="Product Id"
-              icon="../../src/assets/images/icons/profile-circle-grey.svg"
+              :icon="profileCircleGreyIcon"
               required
               :disabled="isLoadingProducts"
             >
@@ -72,7 +72,7 @@
             <FormSelect
               v-model="form.warehouseId"
               label="Warehouse Id"
-              icon="../../src/assets/images/icons/profile-circle-grey.svg"
+              :icon="profileCircleGreyIcon"
               required
               :disabled="isLoadingWarehouses || !form.productId"
             >
@@ -87,7 +87,7 @@
             <FormInput
               v-model="form.stock"
               label="Product Stock"
-              icon="../../src/assets/images/icons/box-grey.svg"
+              :icon="boxGreyIcon"
               required="true"
               type="number"
               min="0"
@@ -177,6 +177,8 @@
 </template>
 
 <script>
+import boxGreyIcon from "@/assets/images/icons/box-grey.svg";
+import profileCircleGreyIcon from "@/assets/images/icons/profile-circle-grey.svg";
 import FormSelect from "@/components/FormSelect.vue";
 import Layout from "@/components/Layout.vue";
 import FormInput from "@/components/FormInput.vue";
@@ -193,6 +195,8 @@ export default {
   },
   data() {
     return {
+      boxGreyIcon,
+      profileCircleGreyIcon,
       merchantDetails: {
         name: "",
         photo: "",

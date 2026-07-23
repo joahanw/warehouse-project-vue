@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { APP_CONFIG } from "../config/app";
 import { clearAllLocalStorage } from "@/js/api";
 import { getMerchants } from "@/js/api/merchants";
+import defaultAvatar from "@/assets/images/photos/photos-1.png";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -44,7 +45,7 @@ export const useAuthStore = defineStore("auth", {
           name: user.name,
           email: user.email,
           roles: user.roleName,
-          avatar: user.photo || "/src/assets/images/photos/photos-1.png",
+          avatar: user.photo || defaultAvatar,
         };
 
         this.token = token;

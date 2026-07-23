@@ -17,7 +17,7 @@
             >
               <img
                 :src="imagePreview || defaultImage"
-                data-default="../../assets/images/icons/gallery-default.svg"
+                data-default="@/assets/images/icons/gallery-default.svg"
                 class="size-full object-cover"
                 alt="icon"
               />
@@ -39,20 +39,20 @@
           <FormInput
             v-model="form.name"
             label="Merchant Name"
-            icon="../../src/assets/images/icons/shop-grey.svg"
+            :icon="shopGreyIcon"
             required="true"
           />
           <FormInput
             v-model="form.phone"
             label="Phone Number"
-            icon="../../src/assets/images/icons/call-grey.svg"
+            :icon="callGreyIcon"
             required="true"
             type="tel"
           />
           <FormSelect
             v-model="form.keeperId"
             label="Keeper"
-            icon="../../src/assets/images/icons/user-thin-grey.svg"
+            :icon="userThinGreyIcon"
             required
           >
             <option
@@ -66,7 +66,7 @@
           <FormTextarea
             v-model="form.address"
             label="Merchant Address"
-            icon="../../src/assets/images/icons/location-grey.svg"
+            :icon="locationGreyIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -90,7 +90,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -100,7 +100,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -110,7 +110,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -121,7 +121,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -131,7 +131,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -147,6 +147,11 @@
 </template>
 
 <script>
+import callGreyIcon from "@/assets/images/icons/call-grey.svg";
+import galleryDefaultIcon from "@/assets/images/icons/gallery-default.svg";
+import locationGreyIcon from "@/assets/images/icons/location-grey.svg";
+import shopGreyIcon from "@/assets/images/icons/shop-grey.svg";
+import userThinGreyIcon from "@/assets/images/icons/user-thin-grey.svg";
 import Layout from "@/components/Layout.vue";
 import FormInput from "@/components/FormInput.vue";
 import FormSelect from "@/components/FormSelect.vue";
@@ -164,6 +169,10 @@ export default {
   },
   data() {
     return {
+      callGreyIcon,
+      locationGreyIcon,
+      shopGreyIcon,
+      userThinGreyIcon,
       form: {
         name: "",
         phone: "",
@@ -175,7 +184,7 @@ export default {
       isSubmitting: false,
       imagePreview: "",
       selectedFile: null,
-      defaultImage: "/src/assets/images/icons/gallery-default.svg",
+      defaultImage: galleryDefaultIcon,
       isLoadingKeepers: false,
     };
   },

@@ -14,7 +14,7 @@
           <FormInput
             v-model="form.name"
             label="Role Name"
-            icon="../../src/assets/images/icons/user-octagon-grey.svg"
+            :icon="userOctagonGreyIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -40,7 +40,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -51,7 +51,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -62,7 +62,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -73,7 +73,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -84,7 +84,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -105,6 +105,7 @@ import FormInput from "@/components/FormInput.vue";
 import { useRolesStore } from "@/stores/roles";
 import { useRouter } from "vue-router";
 import { reactive, computed } from "vue";
+import userOctagonGreyIcon from "@/assets/images/icons/user-octagon-grey.svg";
 
 export default {
   name: "AddRoles",
@@ -147,6 +148,7 @@ export default {
       loading,
       error,
       handleSubmit,
+      userOctagonGreyIcon,
     };
   },
 };

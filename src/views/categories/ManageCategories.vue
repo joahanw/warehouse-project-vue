@@ -9,7 +9,7 @@
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
-                src="../../assets/images/icons/note-2-black.svg"
+                src="@/assets/images/icons/note-2-black.svg"
                 class="size-6 flex shrink-0"
                 alt="icon"
               />
@@ -27,7 +27,7 @@
           >
             Add New
             <img
-              src="../../assets/images/icons/add-square-white.svg"
+              src="@/assets/images/icons/add-square-white.svg"
               class="flex sixe-6 shrink-0"
               alt="icon"
             />
@@ -58,7 +58,7 @@
             class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-red-300 gap-6"
           >
             <img
-              src="/src/assets/images/icons/close-circle-black.svg"
+              src="@/assets/images/icons/close-circle-black.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -76,7 +76,7 @@
             class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
-              src="/src/assets/images/icons/document-text-grey.svg"
+              src="@/assets/images/icons/document-text-grey.svg"
               class="size-[52px]"
               alt="icon"
             />
@@ -109,7 +109,7 @@
                 </div>
                 <div class="flex items-center gap-2 w-full">
                   <img
-                    src="../../assets/images/icons/bag-black.svg"
+                    src="@/assets/images/icons/bag-black.svg"
                     class="size-6 flex shrink-0"
                     alt="icon"
                   />
@@ -127,8 +127,8 @@
                     <img
                       :src="
                         getCategoryStatus(category).status === 'protected'
-                          ? '/src/assets/images/icons/notification-black.svg'
-                          : '/src/assets/images/icons/tick-square-blue.svg'
+                          ? notificationBlackIcon
+                          : tickSquareBlueIcon
                       "
                       class="size-4"
                       alt="status"
@@ -155,7 +155,7 @@
                   class="btn btn-red-opacity min-w-[130px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <img
-                    src="/src/assets/images/icons/trash-red.svg"
+                    src="@/assets/images/icons/trash-red.svg"
                     class="flex size-6 shrink-0"
                     alt="icon"
                   />
@@ -177,6 +177,8 @@
 <script>
 import Layout from "@/components/Layout.vue";
 import { getCategories, deleteCategory } from "@/js/api/products";
+import notificationBlackIcon from "@/assets/images/icons/notification-black.svg";
+import tickSquareBlueIcon from "@/assets/images/icons/tick-square-blue.svg";
 
 export default {
   name: "ManageCategories",
@@ -188,6 +190,8 @@ export default {
       categories: [],
       loading: false,
       error: null,
+      notificationBlackIcon,
+      tickSquareBlueIcon,
     };
   },
   async mounted() {

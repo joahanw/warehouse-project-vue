@@ -17,11 +17,8 @@
             >
               <img
                 id="Thumbnail"
-                :src="
-                  imagePreview ||
-                  '../../src/assets/images/icons/gallery-default.svg'
-                "
-                data-default="../../assets/images/icons/gallery-default.svg"
+                :src="imagePreview || defaultGalleryIcon"
+                data-default="@/assets/images/icons/gallery-default.svg"
                 class="size-full object-cover"
                 alt="icon"
               />
@@ -80,20 +77,20 @@
           <FormInput
             v-model="form.name"
             label="Warehouse Name"
-            icon="../../src/assets/images/icons/buildings-2-grey.svg"
+            :icon="buildingsIcon"
             required="true"
           />
           <FormInput
             v-model="form.phone"
             label="Phone Number"
-            icon="../../src/assets/images/icons/call-grey.svg"
+            :icon="callIcon"
             required="true"
             type="tel"
           />
           <FormTextarea
             v-model="form.address"
             label="Warehouse Address"
-            icon="../../src/assets/images/icons/location-grey.svg"
+            :icon="locationIcon"
             required="true"
           />
           <div class="flex items-center justify-end gap-4">
@@ -116,7 +113,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -127,7 +124,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -138,7 +135,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -149,7 +146,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -159,7 +156,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -175,6 +172,10 @@
 </template>
 
 <script>
+import buildingsIcon from "@/assets/images/icons/buildings-2-grey.svg";
+import callIcon from "@/assets/images/icons/call-grey.svg";
+import defaultGalleryIcon from "@/assets/images/icons/gallery-default.svg";
+import locationIcon from "@/assets/images/icons/location-grey.svg";
 import FormInput from "@/components/FormInput.vue";
 import FormTextarea from "@/components/FormTextarea.vue";
 import Layout from "@/components/Layout.vue";
@@ -189,6 +190,10 @@ export default {
   },
   data() {
     return {
+      buildingsIcon,
+      callIcon,
+      defaultGalleryIcon,
+      locationIcon,
       form: {
         name: "",
         phone: "",

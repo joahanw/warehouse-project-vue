@@ -123,7 +123,7 @@
           <FormSelect
             v-model="form.popularity"
             label="Popularity"
-            icon="../../src/assets/images/icons/strongbox-grey.svg"
+            :icon="strongboxGreyIcon"
             required
           >
             <option :value="true">Popular</option>
@@ -132,21 +132,21 @@
           <FormInput
             v-model="form.name"
             label="Product Name"
-            icon="../../src/assets/images/icons/bag-grey.svg"
+            :icon="bagGreyIcon"
             required="true"
             maxlength="100"
           />
           <FormInput
             v-model="form.barcode"
             label="Product Barcode"
-            icon="../../src/assets/images/icons/barcode-black.svg"
+            :icon="barcodeBlackIcon"
             required="true"
             maxlength="50"
           />
           <FormInput
             v-model="form.price"
             label="Product Price"
-            icon="../../src/assets/images/icons/moneys-grey.svg"
+            :icon="moneysGreyIcon"
             required="true"
             type="number"
             min="0"
@@ -155,7 +155,7 @@
           <FormSelect
             v-model="form.category"
             label="Product Category"
-            icon="../../src/assets/images/icons/note-2-grey.svg"
+            :icon="note2GreyIcon"
             required
           >
             <option
@@ -169,7 +169,7 @@
           <FormTextarea
             v-model="form.about"
             label="Product About"
-            icon="../../src/assets/images/icons/note-2-grey.svg"
+            :icon="note2GreyIcon"
             required="true"
             maxlength="1000"
             :show-counter
@@ -194,7 +194,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -205,7 +205,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -216,7 +216,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -227,7 +227,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -237,7 +237,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -254,6 +254,12 @@
 </template>
 
 <script>
+import bagGreyIcon from "@/assets/images/icons/bag-grey.svg";
+import barcodeBlackIcon from "@/assets/images/icons/barcode-black.svg";
+import galleryDefaultIcon from "@/assets/images/icons/gallery-default.svg";
+import moneysGreyIcon from "@/assets/images/icons/moneys-grey.svg";
+import note2GreyIcon from "@/assets/images/icons/note-2-grey.svg";
+import strongboxGreyIcon from "@/assets/images/icons/strongbox-grey.svg";
 import Layout from "@/components/Layout.vue";
 import FormInput from "@/components/FormInput.vue";
 import FormSelect from "@/components/FormSelect.vue";
@@ -282,7 +288,7 @@ export default {
       popularity: false,
       category: 0,
       about: "",
-      image: "../../src/assets/images/icons/gallery-default.svg",
+      image: galleryDefaultIcon,
     });
 
     const loading = ref(false);
@@ -293,7 +299,7 @@ export default {
     const selectedFile = ref(null);
     const uploadProgress = ref(0);
 
-    const defaultImage = "../../src/assets/images/icons/gallery-default.svg";
+    const defaultImage = galleryDefaultIcon;
 
     const categories = computed(() => productStore.categories);
 
@@ -453,6 +459,11 @@ export default {
     };
 
     return {
+      bagGreyIcon,
+      barcodeBlackIcon,
+      moneysGreyIcon,
+      note2GreyIcon,
+      strongboxGreyIcon,
       form,
       loading,
       error,

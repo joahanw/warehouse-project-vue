@@ -44,7 +44,7 @@
             <FormInput
               v-model="form.username"
               label="Email Address"
-              icon="../../src/assets/images/icons/sms-grey.svg"
+              :icon="smsGreyIcon"
               type="email"
               required="true"
               :disabled="loading"
@@ -52,7 +52,7 @@
             <FormInput
               v-model="form.password"
               label="Password"
-              icon="../../src/assets/images/icons/lock-grey.svg"
+              :icon="lockGreyIcon"
               required="true"
               :disabled="loading"
               :type="showPassword ? 'text' : 'password'"
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import lockGreyIcon from "@/assets/images/icons/lock-grey.svg";
+import smsGreyIcon from "@/assets/images/icons/sms-grey.svg";
 import FormInput from "@/components/FormInput.vue";
 import { useAuthStore } from "@/stores/auth";
 
@@ -85,6 +87,8 @@ export default {
   },
   data() {
     return {
+      lockGreyIcon,
+      smsGreyIcon,
       form: {
         username: "",
         password: "",

@@ -5,7 +5,7 @@
         class="flex flex-col fixed top-0 w-[280px] shrink-0 h-screen pt-[30px] px-4 gap-[30px] overflow-y-auto"
       >
         <img
-          src="../assets/images/logos/logo.svg"
+          src="@/assets/images/logos/logo.svg"
           class="h-8 w-fit"
           alt="logo"
         />
@@ -23,12 +23,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/home-black.svg"
+                      src="@/assets/images/icons/home-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/home-blue-fill.svg"
+                      src="@/assets/images/icons/home-blue-fill.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -53,12 +53,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/card-black.svg"
+                      src="@/assets/images/icons/card-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/card-blue-fill.svg"
+                      src="@/assets/images/icons/card-blue-fill.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -83,12 +83,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/shop-black.svg"
+                      src="@/assets/images/icons/shop-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/shop-blue-fill.svg"
+                      src="@/assets/images/icons/shop-blue-fill.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -115,12 +115,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/profile-circle-black.svg"
+                      src="@/assets/images/icons/profile-circle-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/profile-circle-black.svg"
+                      src="@/assets/images/icons/profile-circle-black.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -142,12 +142,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/setting-black.svg"
+                      src="@/assets/images/icons/setting-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/setting-black.svg"
+                      src="@/assets/images/icons/setting-black.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -169,12 +169,12 @@
                 >
                   <div class="relative flex size-6 shrink-0">
                     <img
-                      src="../assets/images/icons/callcenter-black.svg"
+                      src="@/assets/images/icons/callcenter-black.svg"
                       class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
                       alt="icon"
                     />
                     <img
-                      src="../assets/images/icons/callcenter-black.svg"
+                      src="@/assets/images/icons/callcenter-black.svg"
                       class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
                       alt="icon"
                     />
@@ -207,7 +207,7 @@
               class="flex items-center gap-[6px] text-monday-gray font-semibold"
             >
               <img
-                src="../assets/images/icons/arrow-left-grey.svg"
+                src="@/assets/images/icons/arrow-left-grey.svg"
                 class="size-4 flex shrink-0"
                 alt="icon"
               />
@@ -220,7 +220,7 @@
                 class="flex size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
               >
                 <img
-                  src="../assets//images/icons/search-normal-black.svg"
+                  src="@/assets//images/icons/search-normal-black.svg"
                   class="size-6"
                   alt="icon"
                 />
@@ -231,7 +231,7 @@
                 class="flex size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
               >
                 <img
-                  src="../assets//images/icons/notification-black.svg"
+                  src="@/assets//images/icons/notification-black.svg"
                   class="size-6"
                   alt="icon"
                 />
@@ -242,7 +242,7 @@
                 class="flex size-14 rounded-full bg-monday-lime-green items-center justify-center overflow-hidden"
               >
                 <img
-                  src="../assets//images/icons/crown-black-fill.svg"
+                  src="@/assets//images/icons/crown-black-fill.svg"
                   class="size-6"
                   alt="icon"
                 />
@@ -264,16 +264,14 @@
               class="flex size-full items-center justify-center bg-monday-gray-background"
             >
               <img
-                src="../assets/images/icons/loading.svg"
+                src="@/assets/images/icons/loading.svg"
                 class="size-6 animate-spin"
                 alt="loading"
               />
             </div>
             <img
               v-else
-              :src="
-                currentUser?.avatar || '/src/assets/images/photos/photos-1.png'
-              "
+              :src="currentUser?.avatar || defaultAvatarPhoto"
               class="size-full object-cover"
               alt="photo"
             />
@@ -291,7 +289,7 @@
               <p class="font-semibold">{{ currentUser?.name || "User" }}</p>
               <p class="flex items-center gap-1 font-medium text-monday-gray">
                 <img
-                  src="../assets/images/icons/user-grey.svg"
+                  src="@/assets/images/icons/user-grey.svg"
                   class="size-4"
                   alt="icon"
                 />
@@ -306,7 +304,7 @@
             type="button"
           >
             <img
-              src="../assets/images/icons/logout.svg"
+              src="@/assets/images/icons/logout.svg"
               class="flex size-6 shrink-0 pointer-events-none"
               alt="icon"
             />
@@ -330,7 +328,7 @@
           class="flex size-12 rounded-full bg-red-100 items-center justify-center"
         >
           <img
-            src="../assets/images/icons/logout.svg"
+            src="@/assets/images/icons/logout.svg"
             class="size-6"
             alt="logout"
           />
@@ -359,6 +357,7 @@
 </template>
 
 <script>
+import defaultAvatarPhoto from "../assets/images/photos/photos-1.png";
 import { removeAuthToken } from "../js/api/users";
 import { useAuthStore } from "../stores/auth";
 
@@ -383,6 +382,7 @@ export default {
     return {
       userLoading: false,
       showLogoutConfirm: false,
+      defaultAvatarPhoto,
     };
   },
 

@@ -14,7 +14,7 @@
           <FormSelect
             v-model="form.selectedUser"
             label="Select User Id"
-            icon="../../src/assets/images/icons/profile-circle-grey.svg"
+            :icon="profileCircleGreyIcon"
             required
           >
             <option
@@ -28,7 +28,7 @@
           <FormSelect
             v-model="form.selectedRole"
             label="Select Role Id"
-            icon="../../src/assets/images/icons/profile-tick-grey.svg"
+            :icon="profileTickGreyIcon"
             required
           >
             <option
@@ -54,7 +54,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -65,7 +65,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -76,7 +76,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -86,7 +86,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -97,7 +97,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -119,6 +119,8 @@ import Layout from "@/components/Layout.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { createUserRole, getRoles, getUsers } from "@/js/api/users";
+import profileCircleGreyIcon from "@/assets/images/icons/profile-circle-grey.svg";
+import profileTickGreyIcon from "@/assets/images/icons/profile-tick-grey.svg";
 
 export default {
   name: "AddUserRoles",
@@ -200,6 +202,8 @@ export default {
       availableUsers,
       availableRoles,
       handleSubmit,
+      profileCircleGreyIcon,
+      profileTickGreyIcon,
     };
   },
 };

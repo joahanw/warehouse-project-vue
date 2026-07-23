@@ -14,7 +14,7 @@
                 class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
               >
                 <img
-                  src="../../assets/images/thumbnails/warehouse-1.png"
+                  src="@/assets/images/thumbnails/warehouse-1.png"
                   class="size-full object-cover"
                   alt="icon"
                 />
@@ -25,7 +25,7 @@
                   class="flex items-center gap-1 font-medium text-lg text-monday-gray"
                 >
                   <img
-                    src="../../assets/images/icons/call-grey.svg"
+                    src="@/assets/images/icons/call-grey.svg"
                     class="size-6 flex shrink-0"
                     alt="icon"
                   />
@@ -42,7 +42,7 @@
             <FormSelect
               v-model="form.productId"
               label="Product ID"
-              icon="../../src/assets/images/icons/barcode-black.svg"
+              :icon="barcodeIcon"
               required="true"
             >
               <option
@@ -56,7 +56,7 @@
             <FormInput
               v-model="form.stock"
               label="Product Stock"
-              icon="../../src/assets/images/icons/box-grey.svg"
+              :icon="boxIcon"
               required="true"
               type="number"
               min="0"
@@ -86,7 +86,7 @@
           <ul class="flex flex-col gap-4">
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -97,7 +97,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -108,7 +108,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -118,7 +118,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -128,7 +128,7 @@
             </li>
             <li class="flex gap-[6px]">
               <img
-                src="../../assets/images/icons/Checklist-green-circle.svg"
+                src="@/assets/images/icons/Checklist-green-circle.svg"
                 class="flex size-6 shrink-0"
                 alt="icon"
               />
@@ -143,6 +143,8 @@
   </Layout>
 </template>
 <script>
+import barcodeIcon from "@/assets/images/icons/barcode-black.svg";
+import boxIcon from "@/assets/images/icons/box-grey.svg";
 import FormInput from "@/components/FormInput.vue";
 import FormSelect from "@/components/FormSelect.vue";
 import Layout from "@/components/Layout.vue";
@@ -158,6 +160,8 @@ export default {
   },
   data() {
     return {
+      barcodeIcon,
+      boxIcon,
       warehouse: {
         id: null,
         name: "",
