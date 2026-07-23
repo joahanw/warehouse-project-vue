@@ -50,6 +50,9 @@ class ApiService {
       const response = await fetch(url, config);
       let body = null;
 
+      console.log("Status:", response.status);
+      console.log("Headers:", [...response.headers.entries()]);
+
       try {
         body = await response.json();
       } catch {
