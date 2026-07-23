@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 export const useTransactionStore = defineStore("transaction", {
   state: () => ({
     customerInfo: {
-      name: "",
-      phone: "",
+      customerName: "",
+      phoneNumber: "",
       email: "",
       address: "",
       notes: "",

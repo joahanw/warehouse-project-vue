@@ -392,12 +392,12 @@ onMounted(() => {
   transactionStore.loadFromLocalStorage();
 
   if (!transactionStore.isStep1Complete) {
-    router.push("/transactions/add-1");
+    router.push("/transaction/add-1");
     return;
   }
 
   if (!transactionStore.isStep2Complete) {
-    router.push("/transactions/add-2");
+    router.push("/transaction/add-2");
     return;
   }
 });
@@ -495,7 +495,7 @@ const downloadOrderDetails = () => {
 
 const handleBack = () => {
   transactionStore.previousStep();
-  router.push("/transactions/add-2");
+  router.push("/transaction/add-2");
 };
 
 const generateTransactionId = () => {

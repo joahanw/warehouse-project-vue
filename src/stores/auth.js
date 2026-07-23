@@ -14,7 +14,7 @@ export const useAuthStore = defineStore("auth", {
   getters: {
     currentUser: (state) => state.user,
     isLoggedIn: (state) => state.isAuthenticated,
-    userRole: (state) => state.user?.roleName || null,
+    userRole: (state) => state.user?.roles || null,
     currentToken: (state) => state.token,
     currentMerchant: (state) => state.merchantData,
   },
@@ -99,7 +99,7 @@ export const useAuthStore = defineStore("auth", {
     },
 
     getRedirectUrl() {
-      const roles = this.user?.roles?.toLowerCase().split(",");
+      const roles = this.user?.roles.toLowerCase().split(",") || [];
       if (roles.includes("manager")) {
         return "/overview";
       }
@@ -121,7 +121,7 @@ export const useAuthStore = defineStore("auth", {
     },
 
     hasAccess(requiredRole) {
-      const userRole = this.user?.roles?.toLowerCase().split(",");
+      const userRole = this.user?.roles?.toLowerCase().split(",") || [];
       const roleHierarchy = {
         manager: 2,
         keeper: 1,
@@ -132,7 +132,15 @@ export const useAuthStore = defineStore("auth", {
         -Infinity,
       );
 
-      return userRoleHighest >= roleHierarchy[requiredRole];
+      const requiredRoleNames = Array.isArray(requiredRole)
+        ? requiredRole
+        : [requiredRole];
+      const requiredRoleLowest = requiredRoleNames.reduce(
+        (min, role) => Math.min(roleHierarchy[role?.toLowerCase()] ?? 0, min),
+        Infinity,
+      );
+
+      return userRoleHighest >= requiredRoleLowest;
     },
 
     async checkAuth() {
