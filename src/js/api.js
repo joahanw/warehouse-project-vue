@@ -42,8 +42,12 @@ class ApiService {
       ...options,
     };
 
+    const requestTimeout = options.timeout ?? this.timeout;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+    const timeoutId =
+      Number.isFinite(requestTimeout) && requestTimeout > 0
+        ? setTimeout(() => controller.abort(), requestTimeout)
+        : null;
     config.signal = controller.signal;
 
     try {
@@ -80,7 +84,7 @@ class ApiService {
 
       throw error;
     } finally {
-      clearTimeout(timeoutId);
+      if (timeoutId) clearTimeout(timeoutId);
     }
   }
 

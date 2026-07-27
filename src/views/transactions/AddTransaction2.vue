@@ -1156,7 +1156,7 @@ const searchProductByBarcode = async (barcode) => {
     if (error.message.includes("404") || error.message.includes("not found")) {
       scanError.value =
         "Produk tidak ditemukan. Pastikan barcode benar dan produk tersedia untuk merchant ini.";
-    } else if (error.message.includes("timeout")) {
+    } else if (error.message.toLowerCase().includes("timeout")) {
       scanError.value = "Koneksi timeout. Silakan coba lagi.";
     } else {
       scanError.value = `Gagal mencari produk: ${error.message}`;

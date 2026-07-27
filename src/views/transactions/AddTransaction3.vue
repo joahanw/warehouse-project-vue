@@ -285,12 +285,18 @@
                   @click="handleSaveData"
                   :disabled="isSaving"
                   :class="[
-                    'btn font-semibold transition-all duration-300',
+                    'btn font-semibold transition-all duration-300 flex items-center gap-2',
                     isSaving
                       ? 'btn-primary text-white cursor-not-allowed opacity-50'
                       : 'btn-primary hover:bg-monday-blue/90',
                   ]"
                 >
+                  <img
+                    v-if="isSaving"
+                    src="@/assets/images/icons/loading.svg"
+                    class="size-5 animate-spin"
+                    alt="loading"
+                  />
                   {{ isSaving ? "Saving..." : "Save Data" }}
                 </button>
               </div>
@@ -434,8 +440,9 @@ const handleSaveData = async () => {
     const transactionData = prepareTransactionData();
     console.log("Transaction Data:", transactionData);
 
-    // Call API to create transaction first
-    const response = await createTransaction(transactionData);
+    // Call API to create transaction first — no client timeout, wait as long
+    // as the backend needs (it may be slow generating the Midtrans QRIS token).
+    const response = await createTransaction(transactionData, { timeout: 0 });
 
     if (response.data) {
       // Save transaction data for success page
