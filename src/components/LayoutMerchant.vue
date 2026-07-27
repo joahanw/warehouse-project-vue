@@ -4,11 +4,18 @@
       <div
         class="flex flex-col fixed top-0 w-[280px] shrink-0 h-screen pt-[30px] px-4 gap-[30px] overflow-y-auto"
       >
-        <img
-          src="@/assets/images/logos/logo.svg"
-          class="h-8 w-fit"
-          alt="logo"
-        />
+        <div class="flex items-center gap-2 px-2">
+          <img
+            src="@/assets/images/logos/logo.png"
+            class="size-10 shrink-0 object-contain -my-1"
+            alt="Bakedbyerina"
+          />
+          <span
+            class="font-extrabold text-lg tracking-tight text-monday-black leading-none"
+          >
+            Baked<span class="italic text-monday-blue">byErina</span>
+          </span>
+        </div>
         <div class="flex flex-col gap-5 flex-1 min-h-0 overflow-y-auto">
           <nav class="flex flex-col gap-4">
             <p class="font-medium text-monday-gray">Main Menu</p>
