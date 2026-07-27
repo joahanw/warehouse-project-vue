@@ -28,6 +28,8 @@ coverage
 
 .eslintcache
 .claude
+.agents
+skills-lock.json
 
 # Cypress
 /cypress/videos/

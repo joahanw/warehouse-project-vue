@@ -217,7 +217,8 @@ const isFormValid = computed(() => {
     formData.customerName.trim() &&
     formData.phoneNumber.trim() &&
     formData.email.trim() &&
-    formData.shippingCost.trim() &&
+    Number(formData.shippingCost) >= 0 &&
+    formData.shippingCost !== "" &&
     selectedMerchant.value
   );
 });

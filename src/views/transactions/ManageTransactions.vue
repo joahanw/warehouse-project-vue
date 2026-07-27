@@ -99,7 +99,23 @@
             class="card-merchant flex flex-col rounded-2xl border border-monday-border"
           >
             <div class="flex flex-col gap-5 p-4 pb-5">
-              <p class="font-semibold text-lg">Customer Details</p>
+              <div class="flex items-center justify-between">
+                <p class="font-semibold text-lg">Customer Details</p>
+                <span
+                  :class="
+                    getPaymentStatusBadge(transaction.paymentStatus).class
+                  "
+                  class="flex items-center gap-[6px] px-3 py-1 rounded-full font-semibold text-sm text-nowrap"
+                >
+                  <span
+                    :class="
+                      getPaymentStatusBadge(transaction.paymentStatus).dotClass
+                    "
+                    class="size-[6px] rounded-full shrink-0"
+                  ></span>
+                  {{ getPaymentStatusBadge(transaction.paymentStatus).label }}
+                </span>
+              </div>
               <div class="flex items-center justify-between gap-3">
                 <div
                   class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
@@ -150,60 +166,61 @@
                 v-show="expandedSections.includes(index + 1)"
                 class="flex flex-col gap-5"
               >
-                <div
+                <template
                   v-for="(
                     product, productIndex
                   ) in transaction.transactionProducts"
                   :key="product.id"
-                  class="card flex items-center justify-between gap-3"
                 >
-                  <div class="flex items-center gap-3 w-[420px] shrink-0">
+                  <div class="card flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 w-[420px] shrink-0">
+                      <div
+                        class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                      >
+                        <img
+                          :src="product.product.thumbnail"
+                          class="size-full object-contain"
+                          alt="icon"
+                        />
+                      </div>
+                      <div class="flex flex-col gap-2 flex-1">
+                        <p class="font-semibold text-xl">
+                          {{ product.product.name }}
+                        </p>
+                        <p class="font-semibold text-xl text-monday-blue">
+                          Rp {{ formaterNumber(product.product.price) }}
+                          <span class="text-monday-gray"
+                            >({{ product.quantity }}x)</span
+                          >
+                        </p>
+                      </div>
+                    </div>
                     <div
-                      class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                      class="flex items-center gap-[6px] w-full justify-center"
                     >
                       <img
-                        :src="product.product.thumbnail"
-                        class="size-full object-contain"
+                        :src="product.product.category?.photo"
+                        class="size-6 flex shrink-0"
                         alt="icon"
                       />
-                    </div>
-                    <div class="flex flex-col gap-2 flex-1">
-                      <p class="font-semibold text-xl">
-                        {{ product.product.name }}
-                      </p>
-                      <p class="font-semibold text-xl text-monday-blue">
-                        Rp {{ formaterNumber(product.product.price) }}
-                        <span class="text-monday-gray"
-                          >({{ product.quantity }}x)</span
-                        >
+                      <p class="font-semibold text-lg text-nowrap">
+                        {{ product.product.category?.name }}
                       </p>
                     </div>
+                    <button
+                      @click="showProductDetails(product)"
+                      class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                    >
+                      Details
+                    </button>
                   </div>
-                  <div
-                    class="flex items-center gap-[6px] w-full justify-center"
-                  >
-                    <img
-                      :src="product.product.category?.photo"
-                      class="size-6 flex shrink-0"
-                      alt="icon"
-                    />
-                    <p class="font-semibold text-lg text-nowrap">
-                      {{ product.product.category?.name }}
-                    </p>
-                  </div>
-                  <button
-                    @click="showProductDetails(product)"
-                    class="btn btn-primary-opacity min-w-[130px] font-semibold"
-                  >
-                    Details
-                  </button>
-                </div>
-                <hr
-                  v-if="
-                    productIndex < transaction.transactionProducts?.length - 1
-                  "
-                  class="border-monday-border last:hidden"
-                />
+                  <hr
+                    v-if="
+                      productIndex < transaction.transactionProducts.length - 1
+                    "
+                    class="border-monday-border"
+                  />
+                </template>
               </div>
             </div>
             <hr class="border-monday-border" />
@@ -225,7 +242,7 @@
           </div>
           <div
             v-if="transactions.length === 0"
-            class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
+            class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
               src="@/assets/images/icons/document-text-grey.svg"
@@ -348,6 +365,51 @@ const fetchTransactions = async () => {
 
 const formaterNumber = (number) => {
   return new Intl.NumberFormat("id-ID").format(number);
+};
+
+const getPaymentStatusBadge = (status) => {
+  const normalized = (status || "").toLowerCase();
+
+  if (
+    ["paid", "settlement", "capture", "success", "completed"].includes(
+      normalized,
+    )
+  ) {
+    return {
+      label: "Success",
+      class: "bg-green-50 text-green-700 ring-1 ring-inset ring-green-200",
+      dotClass: "bg-green-500",
+    };
+  }
+  if (
+    [
+      "deny",
+      "cancel",
+      "cancelled",
+      "expire",
+      "expired",
+      "failure",
+      "failed",
+    ].includes(normalized)
+  ) {
+    return {
+      label: "Failed",
+      class: "bg-red-50 text-red-700 ring-1 ring-inset ring-red-200",
+      dotClass: "bg-red-500",
+    };
+  }
+  if (["pending"].includes(normalized)) {
+    return {
+      label: "Pending",
+      class: "bg-gray-100 text-gray-600 ring-1 ring-inset ring-gray-200",
+      dotClass: "bg-gray-400 animate-pulse",
+    };
+  }
+  return {
+    label: status || "Unknown",
+    class: "bg-gray-100 text-gray-600 ring-1 ring-inset ring-gray-200",
+    dotClass: "bg-gray-400",
+  };
 };
 
 const toggleProductAssigned = (sectionId) => {
