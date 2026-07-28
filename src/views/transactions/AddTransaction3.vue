@@ -71,7 +71,7 @@
         id="Products"
         class="flex flex-col gap-6 rounded-3xl p-[18px] px-0"
       >
-        <div class="flex gap-6">
+        <div class="flex flex-col lg:flex-row gap-6">
           <div
             class="flex flex-col w-full h-fit rounded-3xl p-[18px] gap-5 bg-white"
           >
@@ -131,9 +131,9 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col gap-6 w-[392px] shrink-0">
+          <div class="flex flex-col gap-6 w-full lg:w-[392px] lg:shrink-0">
             <div
-              class="flex w-[392px] shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
+              class="flex w-full h-fit rounded-3xl p-[18px] gap-3 bg-white"
             >
               <div
                 class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"

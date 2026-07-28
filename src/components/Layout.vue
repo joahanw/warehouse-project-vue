@@ -1,22 +1,48 @@
 <template>
   <div id="main-container" class="flex flex-1 h-screen">
-    <aside
-      class="relative flex h-screen w-[280px] shrink-0 bg-white overflow-hidden"
-    >
+    <div
+      v-if="mobileMenuOpen"
+      @click="mobileMenuOpen = false"
+      class="fixed inset-0 z-30 bg-black/40 lg:hidden"
+    ></div>
+    <aside class="relative h-screen w-0 lg:w-[280px] shrink-0 overflow-hidden">
       <div
-        class="flex flex-col fixed top-0 w-[280px] shrink-0 h-screen pt-[30px] px-4 gap-[30px] overflow-y-auto"
+        :class="mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'"
+        class="flex flex-col fixed top-0 left-0 z-40 w-[280px] shrink-0 h-screen pt-[30px] px-4 gap-[30px] overflow-y-auto bg-white transition-transform duration-300 lg:translate-x-0"
       >
-        <div class="flex items-center gap-2 px-2">
-          <img
-            src="@/assets/images/logos/logo.png"
-            class="size-10 shrink-0 object-contain -my-1"
-            alt="Bakedbyerina"
-          />
-          <span
-            class="font-extrabold text-lg tracking-tight text-monday-black leading-none"
+        <div class="flex items-center justify-between gap-2 px-2">
+          <div class="flex items-center gap-2 min-w-0">
+            <img
+              src="@/assets/images/logos/logo.png"
+              class="size-10 shrink-0 object-contain -my-1"
+              alt="Bakedbyerina"
+            />
+            <span
+              class="font-extrabold text-lg tracking-tight text-monday-black leading-none truncate"
+            >
+              Baked<span class="italic text-monday-blue">byErina</span>
+            </span>
+          </div>
+          <button
+            @click="mobileMenuOpen = false"
+            type="button"
+            class="flex lg:hidden size-9 shrink-0 items-center justify-center rounded-full bg-monday-gray-background"
           >
-            Baked<span class="italic text-monday-blue">byErina</span>
-          </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
         <div
           class="flex flex-col gap-5 mb-5 overflow-y-scroll hide-scrollbar h-full overscroll-contain"
@@ -386,13 +412,41 @@
         </div>
       </div>
     </aside>
-    <div id="Content" class="flex flex-col flex-1 p-6 pt-0 overflow-y-auto">
-      <div id="Top-Bar" class="flex items-center w-full gap-6 mt-[30px] mb-6">
+    <div
+      id="Content"
+      class="flex flex-col flex-1 min-w-0 p-4 lg:p-6 pt-0 overflow-y-auto"
+    >
+      <div
+        id="Top-Bar"
+        class="flex flex-wrap items-center w-full gap-4 lg:gap-6 mt-4 lg:mt-[30px] mb-6"
+      >
         <div
-          class="flex items-center gap-6 h-[92px] bg-white w-full rounded-3xl p-[18px]"
+          class="flex flex-wrap items-center gap-4 lg:gap-6 min-h-[92px] bg-white flex-1 min-w-0 rounded-3xl p-4 lg:p-[18px]"
         >
-          <div class="flex flex-col gap-[6px] w-full">
-            <h1 class="font-bold text-2xl">{{ pageTitle }}</h1>
+          <button
+            @click="mobileMenuOpen = true"
+            type="button"
+            class="flex lg:hidden size-11 shrink-0 items-center justify-center rounded-full bg-monday-gray-background"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+          <div class="flex flex-col gap-[6px] flex-1 min-w-0">
+            <h1 class="font-bold text-xl lg:text-2xl truncate">
+              {{ pageTitle }}
+            </h1>
             <router-link
               v-if="breadcrumbText"
               :to="breadcrumbLink"
@@ -406,36 +460,36 @@
               {{ breadcrumbText }}
             </router-link>
           </div>
-          <div class="flex items-center flex-nowrap gap-3">
+          <div class="flex items-center flex-nowrap gap-2 lg:gap-3">
             <a href="/overview">
               <div
-                class="flex size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
+                class="flex size-11 lg:size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
               >
                 <img
                   src="@/assets/images/icons/search-normal-black.svg"
-                  class="size-6"
+                  class="size-5 lg:size-6"
                   alt="icon"
                 />
               </div>
             </a>
             <a href="/products">
               <div
-                class="flex size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
+                class="flex size-11 lg:size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
               >
                 <img
                   src="@/assets/images/icons/notification-black.svg"
-                  class="size-6"
+                  class="size-5 lg:size-6"
                   alt="icon"
                 />
               </div>
             </a>
             <div class="relative w-fit">
               <div
-                class="flex size-14 rounded-full bg-monday-lime-green items-center justify-center overflow-hidden"
+                class="flex size-11 lg:size-14 rounded-full bg-monday-lime-green items-center justify-center overflow-hidden"
               >
                 <img
                   src="@/assets/images/icons/crown-black-fill.svg"
-                  class="size-6"
+                  class="size-5 lg:size-6"
                   alt="icon"
                 />
               </div>
@@ -448,7 +502,7 @@
           </div>
         </div>
         <div
-          class="flex items-center gap-3 h-[92px] bg-white w-fit rounded-3xl p-[18px] relative"
+          class="flex items-center gap-3 h-[92px] bg-white w-full lg:w-fit rounded-3xl p-4 lg:p-[18px] relative"
         >
           <div class="flex rounded-full overflow-hidden size-14">
             <div
@@ -491,7 +545,7 @@
           </div>
           <button
             @click="handleLogout"
-            class="flex w-6 h-6 items-center justify-center hover:opacity-70 transition-opacity cursor-pointer relative z-10"
+            class="flex w-6 h-6 items-center justify-center hover:opacity-70 transition-opacity cursor-pointer relative z-10 ml-auto lg:ml-0"
             title="Logout"
             type="button"
           >
@@ -576,6 +630,7 @@ export default {
       userMenuExpanded: false,
       userLoading: false,
       showLogoutConfirm: false,
+      mobileMenuOpen: false,
       arrowCircleDownIcon,
       arrowCircleUpIcon,
       defaultAvatarPhoto,
@@ -615,6 +670,7 @@ export default {
       ) {
         this.userMenuExpanded = true;
       }
+      this.mobileMenuOpen = false;
     },
   },
 
@@ -665,6 +721,9 @@ export default {
     handleKeydown(event) {
       if (event.key === "Escape" && this.showLogoutConfirm) {
         this.cancelLogout();
+      }
+      if (event.key === "Escape" && this.mobileMenuOpen) {
+        this.mobileMenuOpen = false;
       }
     },
   },

@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="flex gap-6">
+      <div class="flex flex-col lg:flex-row gap-6">
         <form
           @submit.prevent="handleSubmit"
           class="flex flex-col w-full rounded-3xl p-[18px] gap-5 bg-white"
@@ -130,7 +130,7 @@
           </div>
         </form>
         <div
-          class="flex w-[392px] shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
+          class="flex w-full lg:w-[392px] lg:shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
         >
           <div
             v-if="loading"

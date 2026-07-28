@@ -5,7 +5,7 @@
     breadcrumb-link="/detail-merchants"
   >
     <main class="flex flex-col gap-6 flex-1">
-      <div class="flex gap-6">
+      <div class="flex flex-col lg:flex-row gap-6">
         <div class="flex flex-col gap-6 w-full">
           <!-- Loading State for Merchant Details -->
           <div
@@ -111,7 +111,7 @@
           </form>
         </div>
         <div
-          class="flex flex-col w-[392px] shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
+          class="flex flex-col w-full lg:w-[392px] lg:shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
         >
           <p class="font-semibold">Quick Guide to Assign New Product</p>
           <ul class="flex flex-col gap-4">

@@ -258,14 +258,14 @@
     </main>
     <div
       v-if="showModal"
-      class="modal flex flex-1 items-center justify-center h-full fixed top w-full z-50 left-0"
+      class="modal flex flex-1 items-center justify-center h-full fixed top w-full z-50 left-0 p-4"
     >
       <div
         @click="closeModal"
         class="backdrop absolute w-full h-full bg-[#292D32B2]"
       ></div>
       <div
-        class="relative flex flex-col w-[406px] shrink-0 rounded-3xl p-[18px] gap-5 bg-white"
+        class="relative flex flex-col w-full max-w-[406px] max-h-[90vh] overflow-y-auto rounded-3xl p-[18px] gap-5 bg-white"
       >
         <div class="modal-header flex items-center justify-between">
           <p class="font-semibold text-xl">Product Details</p>

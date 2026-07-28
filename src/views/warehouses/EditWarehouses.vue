@@ -5,7 +5,7 @@
     breadcrumb-link="/warehouses"
   >
     <main class="flex flex-col gap-6 flex-1">
-      <div class="flex gap-6">
+      <div class="flex flex-col lg:flex-row gap-6">
         <form
           @submit.prevent="handleSubmit"
           class="flex flex-col w-full rounded-3xl p-[18px] gap-5 bg-white"
@@ -91,7 +91,7 @@
           </div>
         </form>
         <div
-          class="flex flex-col w-[392px] shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
+          class="flex flex-col w-full lg:w-[392px] lg:shrink-0 h-fit rounded-3xl p-[18px] gap-3 bg-white"
         >
           <p class="font-semibold">Quick Guide to Edit Warehouse</p>
           <ul class="flex flex-col gap-4">
