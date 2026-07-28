@@ -151,36 +151,40 @@
             :key="transaction.id"
             class="card-merchant flex flex-col rounded-2xl border border-monday-border"
           >
-            <div class="flex items-center justify-between p-4 gap-3 pb-5">
-              <div
-                class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-              >
-                <img
-                  src="@/assets/images/icons/user-thin-grey.svg"
-                  class="flex size-[42px] shrink-0"
-                  alt="icon"
-                />
-              </div>
-              <div class="flex flex-col gap-2 flex-1">
-                <p class="font-semibold text-xl">{{ transaction.name }}</p>
-                <p
-                  class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+            <div class="flex flex-wrap items-center gap-3 p-4 pb-5">
+              <div class="flex items-center gap-3 min-w-0 flex-1">
+                <div
+                  class="flex size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                 >
                   <img
-                    src="@/assets/images/icons/call-grey.svg"
-                    class="size-6 flex shrink-0"
+                    src="@/assets/images/icons/user-thin-grey.svg"
+                    class="flex size-[42px] shrink-0"
                     alt="icon"
                   />
-                  <span>{{ transaction.phone }}</span>
-                </p>
+                </div>
+                <div class="flex flex-col gap-2 min-w-0 flex-1">
+                  <p class="font-semibold text-xl truncate">
+                    {{ transaction.name }}
+                  </p>
+                  <p
+                    class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+                  >
+                    <img
+                      src="@/assets/images/icons/call-grey.svg"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <span class="truncate">{{ transaction.phone }}</span>
+                  </p>
+                </div>
               </div>
-              <div class="flex items-center gap-[6px]">
+              <div class="flex items-center gap-[6px] max-w-full min-w-0">
                 <img
                   src="@/assets/images/icons/shop-black.svg"
                   class="size-6 flex shrink-0"
                   alt="icon"
                 />
-                <p class="font-semibold text-lg text-nowrap">
+                <p class="font-semibold text-lg truncate">
                   {{ transaction.merchantName }}
                 </p>
               </div>
@@ -215,11 +219,11 @@
                     product, productIndex
                   ) in transaction.transactionProducts"
                   :key="product.id"
-                  class="card flex flex-wrap items-center justify-between gap-3"
+                  class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
                 >
-                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                  <div class="flex items-center gap-3 min-w-0 xl:flex-1">
                     <div
-                      class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                      class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                     >
                       <img
                         :src="product.product.thumbnail"
@@ -227,11 +231,11 @@
                         alt="product"
                       />
                     </div>
-                    <div class="flex flex-col gap-2 flex-1">
-                      <p class="font-semibold text-xl line-clamp-1">
+                    <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                      <p class="font-semibold text-lg xl:text-xl line-clamp-1">
                         {{ product.product.name }}
                       </p>
-                      <p class="font-semibold text-xl text-monday-blue">
+                      <p class="font-semibold text-lg xl:text-xl text-monday-blue">
                         Rp {{ formatCurrency(product.product.price) }}
                         <span class="text-monday-gray"
                           >({{ product.quantity }}x)</span
@@ -239,20 +243,20 @@
                       </p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-[6px] flex-1">
+                  <div class="flex items-center gap-[6px] xl:flex-1">
                     <img
                       :src="product.product.category?.photo"
                       class="size-6 flex shrink-0"
                       alt="icon"
                       @error="(e) => (e.target.src = boxGreyIcon)"
                     />
-                    <p class="font-semibold text-lg text-nowrap">
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
                       {{ product.product.category?.name || "Uncategorized" }}
                     </p>
                   </div>
                   <button
                     @click="showProductDetails(product)"
-                    class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                    class="btn btn-primary-opacity w-full xl:w-auto xl:min-w-[130px] justify-center font-semibold"
                   >
                     Details
                   </button>

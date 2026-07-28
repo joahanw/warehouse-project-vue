@@ -5,7 +5,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -19,7 +19,10 @@
               View and update your Roles here.
             </p>
           </div>
-          <router-link to="/add-roles" class="btn btn-primary font-semibold">
+          <router-link
+            to="/add-roles"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
+          >
             Add New
             <img
               src="@/assets/images/icons/add-square-white.svg"
@@ -84,10 +87,12 @@
 
           <div v-else class="flex flex-col gap-5">
             <template v-for="(role, index) in roles" :key="role.id">
-              <div class="card flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-3 w-[300px] shrink-0">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[300px] xl:shrink-0">
                   <div
-                    class="flex size-[54px] rounded-2xl bg-monday-gray-background items-center justify-center"
+                    class="flex size-[54px] shrink-0 rounded-2xl bg-monday-gray-background items-center justify-center"
                   >
                     <img
                       src="@/assets/images/icons/user-octagon-grey.svg"
@@ -95,13 +100,13 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[220px] truncate">
+                  <div class="flex flex-col gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-xl truncate">
                       {{ role.name }}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 min-w-[187px]">
+                <div class="flex items-center gap-2 xl:min-w-[187px]">
                   <img
                     src="@/assets/images/icons/profile-2user-black.svg"
                     class="size-6 flex shrink-0"
@@ -113,7 +118,7 @@
                 </div>
                 <router-link
                   :to="`/edit-roles/${role.id}`"
-                  class="btn btn-black min-w-[130px] font-semibold"
+                  class="btn btn-black w-full xl:w-auto xl:min-w-[130px] justify-center font-semibold"
                 >
                   <img
                     src="@/assets/images/icons/edit-white.svg"

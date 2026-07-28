@@ -5,7 +5,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -21,7 +21,10 @@
               View and update Total User list here.
             </p>
           </div>
-          <a href="/add-users" class="btn btn-primary font-semibold">
+          <a
+            href="/add-users"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
+          >
             Add New
             <img
               src="@/assets/images/icons/add-square-white.svg"
@@ -68,11 +71,13 @@
           </div>
 
           <div v-else-if="users.length > 0" class="flex flex-col gap-5">
-            <template v-for="user in users" :key="user.id">
-              <div class="card flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
+            <template v-for="(user, index) in users" :key="user.id">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 min-w-0">
                   <div
-                    class="flex size-[76px] rounded-full bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[76px] shrink-0 rounded-full bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="user.photo"
@@ -80,10 +85,12 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl">{{ user.name }}</p>
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
+                      {{ user.name }}
+                    </p>
                     <p
-                      class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+                      class="flex items-center gap-1 font-medium text-base xl:text-lg text-monday-gray"
                     >
                       <img
                         src="@/assets/images/icons/call-grey.svg"
@@ -94,9 +101,9 @@
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-3 w-[226px] shrink-0">
+                <div class="flex items-center gap-3 w-full xl:w-[226px] xl:shrink-0">
                   <div
-                    class="flex size-[54px] rounded-2xl bg-monday-gray-background items-center justify-center"
+                    class="flex size-[54px] shrink-0 rounded-2xl bg-monday-gray-background items-center justify-center"
                   >
                     <img
                       src="@/assets/images/icons/user-octagon-grey.svg"
@@ -115,7 +122,7 @@
                 </div>
                 <router-link
                   :to="`/edit-users/${user.id}`"
-                  class="btn btn-black min-w-[130px] font-semibold"
+                  class="btn btn-black w-full xl:w-auto xl:min-w-[130px] justify-center font-semibold"
                 >
                   <img
                     src="@/assets/images/icons/edit-white.svg"

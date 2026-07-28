@@ -7,7 +7,7 @@
     <main class="flex flex-col gap-6 flex-1">
       <div
         id="Steps"
-        class="relative flex w-full h-[127px] rounded-3xl p-[18px] bg-white"
+        class="relative flex w-full h-auto sm:h-[127px] rounded-3xl p-[18px] bg-white"
       >
         <div
           class="relative flex flex-col w-full gap-3 items-center text-center"
@@ -18,8 +18,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 1</p>
-            <p class="font-semibold text-lg">Customer Detail</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 1</p>
+            <p class="font-semibold text-xs sm:text-lg">Customer Detail</p>
           </div>
         </div>
         <div
@@ -40,8 +40,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 2</p>
-            <p class="font-semibold text-lg">Assign Products</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 2</p>
+            <p class="font-semibold text-xs sm:text-lg">Assign Products</p>
           </div>
         </div>
         <div
@@ -62,8 +62,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 3</p>
-            <p class="font-semibold text-lg">Review Transaction</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 3</p>
+            <p class="font-semibold text-xs sm:text-lg">Review Transaction</p>
           </div>
         </div>
       </div>

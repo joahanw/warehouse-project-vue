@@ -22,31 +22,33 @@
 
       <section
         id="Warehouse-Info"
-        class="flex items-center justify-between rounded-3xl p-[18px] gap-3 bg-white"
+        class="flex flex-col lg:flex-row gap-4 lg:gap-3 lg:items-center lg:justify-between rounded-3xl p-[18px] bg-white"
       >
-        <div
-          class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-        >
-          <img
-            :src="merchant.photo"
-            class="size-full object-contain"
-            alt="icon"
-          />
-        </div>
-        <div class="flex flex-col gap-2 flex-1">
-          <p class="font-semibold text-xl">{{ merchant.name }}</p>
-          <p
-            class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+        <div class="flex items-center gap-3 min-w-0">
+          <div
+            class="flex size-16 shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
           >
             <img
-              src="@/assets/images/icons/call-grey.svg"
-              class="size-6 flex shrink-0"
+              :src="merchant.photo"
+              class="size-full object-contain"
               alt="icon"
             />
-            <span>{{ merchant.phone }}</span>
-          </p>
+          </div>
+          <div class="flex flex-col gap-2 min-w-0 lg:flex-1">
+            <p class="font-semibold text-xl truncate">{{ merchant.name }}</p>
+            <p
+              class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+            >
+              <img
+                src="@/assets/images/icons/call-grey.svg"
+                class="size-6 flex shrink-0"
+                alt="icon"
+              />
+              <span>{{ merchant.phone }}</span>
+            </p>
+          </div>
         </div>
-        <div class="flex flex-col gap-2 flex-1">
+        <div class="flex flex-col gap-2 lg:flex-1">
           <p class="flex items-center gap-1 font-medium text-monday-gray">
             <img
               src="@/assets/images/icons/user-grey.svg"
@@ -59,7 +61,7 @@
         </div>
         <router-link
           :to="`/edit-merchants/${merchant.id}`"
-          class="btn btn-black w-[160px] font-semibold text-nowrap"
+          class="btn btn-black w-full lg:w-[160px] justify-center font-semibold text-nowrap"
         >
           Edit Merchant
         </router-link>
@@ -68,7 +70,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -86,7 +88,7 @@
           </div>
           <router-link
             :to="`/assign-merchant-products/${merchant.id}`"
-            class="btn btn-primary font-semibold"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
           >
             Assign a Products
             <img
@@ -116,10 +118,12 @@
 
           <div v-else-if="products.length > 0" class="flex flex-col gap-5">
             <template v-for="product in products" :key="product.id">
-              <div class="card flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-3 w-[260px] shrink-0">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[260px] xl:shrink-0">
                   <div
-                    class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="product.product.thumbnail"
@@ -127,44 +131,42 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[162px] truncate">
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ product.product.name }}
                     </p>
-                    <p class="font-semibold text-xl text-monday-blue">
+                    <p class="font-semibold text-lg xl:text-xl text-monday-blue">
                       Rp {{ formatPrice(product.product.price) }}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    src="@/assets/images/icons/box-black.svg"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="font-semibold text-lg text-nowrap w-[124px] truncate"
-                  >
-                    {{ product.stock }} Stock
-                  </p>
+                <div class="flex flex-wrap items-center gap-3 xl:contents">
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      src="@/assets/images/icons/box-black.svg"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.stock }} Stock
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      :src="product.product.category.photo"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.product.category.name }}
+                    </p>
+                  </div>
                 </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    :src="product.product.category.photo"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="font-semibold text-lg text-nowrap w-[124px] truncate"
-                  >
-                    {{ product.product.category.name }}
-                  </p>
-                </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 xl:gap-4 w-full xl:w-auto">
                   <button
                     @click="openModal(product.product, product.warehouse)"
                     type="button"
-                    class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                    class="btn btn-primary-opacity flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     Details
                   </button>
@@ -189,7 +191,7 @@
                         keeper_name: merchant.keeperName,
                       },
                     }"
-                    class="btn btn-black min-w-[130px] font-semibold"
+                    class="btn btn-black flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     Add Stock
                   </router-link>

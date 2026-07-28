@@ -18,6 +18,9 @@
   .btn-primary-opacity {
     @apply bg-monday-blue/10 text-monday-blue rounded-2xl ring-0 hover:ring-[1.5px] hover:ring-monday-blue transition-300;
   }
+  .btn-red-opacity {
+    @apply bg-monday-red/10 text-monday-red rounded-2xl ring-0 hover:ring-[1.5px] hover:ring-monday-red transition-300;
+  }
 }
 
 @layer utilities {

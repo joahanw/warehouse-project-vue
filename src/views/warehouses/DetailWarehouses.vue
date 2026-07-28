@@ -42,7 +42,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <span class="font-semibold text-2xl"
@@ -55,7 +55,7 @@
           </div>
           <router-link
             :to="`/assign-warehouse-products/${warehouse.id}`"
-            class="btn btn-primary font-semibold"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
           >
             Assign a Products
             <img
@@ -85,10 +85,12 @@
           </div>
           <div v-else class="flex flex-col gap-5">
             <template v-for="product in warehouseProducts" :key="product.id">
-              <div class="card flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-3 w-[260px] shrink-0">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[260px] xl:shrink-0">
                   <div
-                    class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="product.thumbnail"
@@ -96,50 +98,48 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[162px] truncate">
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ product.name }}
                     </p>
-                    <p class="font-semibold text-xl text-monday-blue">
+                    <p class="font-semibold text-lg xl:text-xl text-monday-blue">
                       Rp {{ formatNumber(product.price) }}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    src="@/assets/images/icons/box-black.svg"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="font-semibold text-lg text-nowrap w-[124px] truncate"
-                  >
-                    {{ product.stock }} Stock
-                  </p>
+                <div class="flex flex-wrap items-center gap-3 xl:contents">
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      src="@/assets/images/icons/box-black.svg"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.stock }} Stock
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      :src="product.category.photo"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.category.name }}
+                    </p>
+                  </div>
                 </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    :src="product.category.photo"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="font-semibold text-lg text-nowrap w-[124px] truncate"
-                  >
-                    {{ product.category.name }}
-                  </p>
-                </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 xl:gap-4 w-full xl:w-auto">
                   <button
                     @click="showProductDetails(product)"
                     type="button"
-                    class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                    class="btn btn-primary-opacity flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     Details
                   </button>
                   <router-link
                     :to="`/update-stock-warehouses/${warehouse.id}/stock/${product.id}`"
-                    class="btn btn-black min-w-[130px] font-semibold"
+                    class="btn btn-black flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     Add Stock
                   </router-link>

@@ -7,33 +7,37 @@
     <main class="flex flex-col gap-6 flex-1">
       <section
         id="Warehouse-Info"
-        class="flex items-center justify-between rounded-3xl p-[18px] gap-3 bg-white"
+        class="flex flex-col lg:flex-row gap-4 lg:gap-3 lg:items-center rounded-3xl p-[18px] bg-white"
       >
-        <div
-          class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-        >
-          <img
-            :src="
-              merchantInfo?.photo || '@/assets/images/thumbnails/merchant-1.png'
-            "
-            class="size-full object-contain"
-            alt="icon"
-          />
-        </div>
-        <div class="flex flex-col gap-2 flex-1">
-          <p class="font-semibold text-xl">{{ merchantInfo?.name }}</p>
-          <p
-            class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+        <div class="flex items-center gap-3 min-w-0">
+          <div
+            class="flex size-16 shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
           >
             <img
-              src="@/assets/images/icons/call-grey.svg"
-              class="size-6 flex shrink-0"
+              :src="
+                merchantInfo?.photo || '@/assets/images/thumbnails/merchant-1.png'
+              "
+              class="size-full object-contain"
               alt="icon"
             />
-            <span>{{ merchantInfo?.phone }}</span>
-          </p>
+          </div>
+          <div class="flex flex-col gap-2 min-w-0 lg:flex-1">
+            <p class="font-semibold text-xl truncate">
+              {{ merchantInfo?.name }}
+            </p>
+            <p
+              class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+            >
+              <img
+                src="@/assets/images/icons/call-grey.svg"
+                class="size-6 flex shrink-0"
+                alt="icon"
+              />
+              <span>{{ merchantInfo?.phone }}</span>
+            </p>
+          </div>
         </div>
-        <div class="flex flex-col gap-2 flex-1">
+        <div class="flex flex-col gap-2 lg:flex-1">
           <p class="flex items-center gap-1 font-medium text-monday-gray">
             <img
               src="@/assets/images/icons/user-grey.svg"
@@ -51,7 +55,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -69,7 +73,7 @@
           </div>
           <router-link
             to="/transaction/add-1"
-            class="btn btn-primary font-semibold"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
           >
             Add New
             <img
@@ -81,7 +85,7 @@
         </div>
         <hr class="border-monday-border" />
         <div id="Product-List" class="flex flex-col px-4 gap-5 flex-1">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-wrap items-center justify-between gap-3">
             <p class="font-semibold text-xl">All Transactions</p>
             <div class="flex items-center gap-2">
               <button
@@ -172,10 +176,12 @@
                   ) in transaction.transactionProducts"
                   :key="product.id"
                 >
-                  <div class="card flex flex-wrap items-center justify-between gap-3">
-                    <div class="flex items-center gap-3 w-[420px] shrink-0">
+                  <div
+                    class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
+                  >
+                    <div class="flex items-center gap-3 w-full xl:w-[420px] xl:shrink-0">
                       <div
-                        class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                        class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                       >
                         <img
                           :src="product.product.thumbnail"
@@ -183,11 +189,11 @@
                           alt="icon"
                         />
                       </div>
-                      <div class="flex flex-col gap-2 flex-1">
-                        <p class="font-semibold text-xl">
+                      <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                        <p class="font-semibold text-lg xl:text-xl truncate">
                           {{ product.product.name }}
                         </p>
-                        <p class="font-semibold text-xl text-monday-blue">
+                        <p class="font-semibold text-lg xl:text-xl text-monday-blue">
                           Rp {{ formaterNumber(product.product.price) }}
                           <span class="text-monday-gray"
                             >({{ product.quantity }}x)</span
@@ -196,20 +202,20 @@
                       </div>
                     </div>
                     <div
-                      class="flex items-center gap-[6px] w-full justify-center"
+                      class="flex items-center gap-[6px] xl:flex-1 xl:justify-center"
                     >
                       <img
                         :src="product.product.category?.photo"
                         class="size-6 flex shrink-0"
                         alt="icon"
                       />
-                      <p class="font-semibold text-lg text-nowrap">
+                      <p class="font-semibold text-base xl:text-lg text-nowrap">
                         {{ product.product.category?.name }}
                       </p>
                     </div>
                     <button
                       @click="showProductDetails(product)"
-                      class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                      class="btn btn-primary-opacity w-full xl:w-auto xl:min-w-[130px] justify-center font-semibold"
                     >
                       Details
                     </button>

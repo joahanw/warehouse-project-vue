@@ -55,7 +55,7 @@
         v-if="merchants"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -100,63 +100,68 @@
           </div>
 
           <div v-else class="flex flex-col gap-5">
-            <div
+            <template
               v-for="(product, index) in merchantProducts"
               :key="product.id"
-              class="card flex flex-wrap items-center justify-between gap-6"
             >
-              <div class="flex items-center gap-3 w-[340px] shrink-0">
-                <div
-                  class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-                >
-                  <img
-                    :src="product.product.thumbnail"
-                    class="size-full object-contain"
-                    alt="icon"
-                  />
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[340px] xl:shrink-0">
+                  <div
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                  >
+                    <img
+                      :src="product.product.thumbnail"
+                      class="size-full object-contain"
+                      alt="icon"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
+                      {{ product.product.name }}
+                    </p>
+                    <p class="font-semibold text-lg xl:text-xl text-monday-blue">
+                      Rp {{ formatPrice(product.product.price) }}
+                    </p>
+                  </div>
                 </div>
-                <div class="flex flex-col gap-2 flex-1">
-                  <p class="font-semibold text-xl w-[242px] truncate">
-                    {{ product.product.name }}
-                  </p>
-                  <p class="font-semibold text-xl text-monday-blue">
-                    Rp {{ formatPrice(product.product.price) }}
-                  </p>
+                <div class="flex flex-wrap items-center gap-3 xl:contents">
+                  <div class="flex items-center gap-[6px] xl:w-[187px] xl:shrink-0">
+                    <img
+                      src="@/assets/images/icons/box-black.svg"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.stock }} Stock
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-[6px] xl:w-[187px] xl:shrink-0">
+                    <img
+                      :src="product.product.category?.photo"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.product.category?.name }}
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 w-full xl:w-auto">
+                  <button
+                    @click="showProductDetails(product)"
+                    class="btn btn-primary-opacity w-full xl:w-auto xl:min-w-[130px] justify-center font-semibold"
+                  >
+                    Details
+                  </button>
                 </div>
               </div>
-              <div class="flex items-center gap-[6px] w-[187px] shrink-0">
-                <img
-                  src="@/assets/images/icons/box-black.svg"
-                  class="size-6 flex shrink-0"
-                  alt="icon"
-                />
-                <p class="font-semibold text-lg text-nowrap w-[124px] truncate">
-                  {{ product.stock }} Stock
-                </p>
-              </div>
-              <div class="flex items-center gap-[6px] w-[187px] shrink-0">
-                <img
-                  :src="product.product.category?.photo"
-                  class="size-6 flex shrink-0"
-                  alt="icon"
-                />
-                <p class="font-semibold text-lg text-nowrap w-[124px] truncate">
-                  {{ product.product.category?.name }}
-                </p>
-              </div>
-              <div class="flex items-center gap-4">
-                <button
-                  @click="showProductDetails(product)"
-                  class="btn btn-primary-opacity min-w-[130px] font-semibold"
-                >
-                  Details
-                </button>
-              </div>
-            </div>
-            <hr
-              v-if="index < merchantProducts.length - 1"
-              class="border-monday-border last:hidden"
-            />
+              <hr
+                v-if="index < merchantProducts.length - 1"
+                class="border-monday-border last:hidden"
+              />
+            </template>
           </div>
           <div
             v-if="

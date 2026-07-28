@@ -7,7 +7,7 @@
     <main class="flex flex-col gap-6 flex-1">
       <div
         id="Steps"
-        class="relative flex w-full h-[127px] rounded-3xl p-[18px] bg-white"
+        class="relative flex w-full h-auto sm:h-[127px] rounded-3xl p-[18px] bg-white"
       >
         <div
           class="relative flex flex-col w-full gap-3 items-center text-center"
@@ -18,8 +18,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 1</p>
-            <p class="font-semibold text-lg">Customer Detail</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 1</p>
+            <p class="font-semibold text-xs sm:text-lg">Customer Detail</p>
           </div>
         </div>
         <div
@@ -40,8 +40,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 2</p>
-            <p class="font-semibold text-lg">Assign Products</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 2</p>
+            <p class="font-semibold text-xs sm:text-lg">Assign Products</p>
           </div>
         </div>
         <div
@@ -62,8 +62,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 3</p>
-            <p class="font-semibold text-lg">Review Transaction</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 3</p>
+            <p class="font-semibold text-xs sm:text-lg">Review Transaction</p>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
         id="Products"
         class="flex flex-col flex-1 gap-6 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -96,10 +96,10 @@
               produk merchant ini stoknya habis
             </p>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <button
               @click="openBarcodeScanner"
-              class="btn bg-monday-blue/10 text-monday-blue font-semibold rounded-full"
+              class="btn bg-monday-blue/10 text-monday-blue font-semibold rounded-full flex-1 sm:flex-initial justify-center"
             >
               <img
                 src="@/assets/images/icons/barcode-black.svg"
@@ -110,7 +110,7 @@
             </button>
             <button
               @click="openAssignModal"
-              class="btn btn-primary font-semibold"
+              class="btn btn-primary font-semibold flex-1 sm:flex-initial justify-center"
             >
               Assign Product
               <img
@@ -130,11 +130,11 @@
             <div
               v-for="(product, index) in assignedProducts"
               :key="product.id"
-              class="card flex flex-wrap items-center justify-between gap-6"
+              class="card flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
             >
-              <div class="flex items-center gap-3 w-[340px] shrink-0">
+              <div class="flex items-center gap-3 w-full xl:w-[340px] xl:shrink-0">
                 <div
-                  class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                  class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                 >
                   <img
                     :src="product.image"
@@ -142,11 +142,11 @@
                     alt="icon"
                   />
                 </div>
-                <div class="flex flex-col gap-2 flex-1">
-                  <p class="font-semibold text-xl w-[242px] truncate">
+                <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                  <p class="font-semibold text-lg xl:text-xl truncate">
                     {{ product.name }}
                   </p>
-                  <p class="font-semibold text-xl text-monday-blue">
+                  <p class="font-semibold text-lg xl:text-xl text-monday-blue">
                     {{ product.price }}
                     <span class="text-monday-gray"
                       >({{ product.quantity }}x)</span
@@ -154,33 +154,35 @@
                   </p>
                 </div>
               </div>
-              <div class="flex items-center gap-[6px] w-[187px] shrink-0">
-                <img
-                  :src="product.categoryIcon"
-                  class="size-6 flex shrink-0"
-                  alt="icon"
-                />
-                <p class="font-semibold text-lg text-nowrap w-[124px] truncate">
-                  {{ product.category }}
-                </p>
-              </div>
-              <div class="flex flex-col gap-2 w-[187px] shrink-0">
-                <p class="flex items-center gap-1 font-medium text-monday-gray">
+              <div class="flex flex-wrap items-center gap-3 xl:contents">
+                <div class="flex items-center gap-[6px] xl:w-[187px] xl:shrink-0">
                   <img
-                    src="@/assets/images/icons/money-grey.svg"
-                    class="size-4 flex shrink-0"
+                    :src="product.categoryIcon"
+                    class="size-6 flex shrink-0"
                     alt="icon"
                   />
-                  Subtotal
-                </p>
-                <p class="font-semibold text-xl text-monday-blue">
-                  {{ product.subtotal }}
-                </p>
+                  <p class="font-semibold text-base xl:text-lg text-nowrap">
+                    {{ product.category }}
+                  </p>
+                </div>
+                <div class="flex flex-col gap-2 xl:w-[187px] xl:shrink-0">
+                  <p class="flex items-center gap-1 font-medium text-monday-gray">
+                    <img
+                      src="@/assets/images/icons/money-grey.svg"
+                      class="size-4 flex shrink-0"
+                      alt="icon"
+                    />
+                    Subtotal
+                  </p>
+                  <p class="font-semibold text-xl text-monday-blue">
+                    {{ product.subtotal }}
+                  </p>
+                </div>
               </div>
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-4 w-full xl:w-auto">
                 <button
                   @click="removeProduct(product.id)"
-                  class="btn bg-monday-red/10 rounded-2xl text-monday-red w-[146px] font-semibold"
+                  class="btn bg-monday-red/10 rounded-2xl text-monday-red w-full xl:w-[146px] justify-center font-semibold"
                 >
                   <img
                     src="@/assets/images/icons/trash-red.svg"
@@ -205,14 +207,23 @@
               Oops, it looks like there's no data yet.
             </p>
           </div>
-          <div class="flex items-center justify-between px-[18px] py-4">
-            <button @click="handleBack" class="btn btn-red font-semibold">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px] py-4"
+          >
+            <button
+              @click="handleBack"
+              class="btn btn-red font-semibold w-full sm:w-auto justify-center"
+            >
               Back
             </button>
-            <div class="flex items-center gap-4">
-              <div class="flex flex-col items-end">
-                <p class="font-semibold text-lg">Total Amount</p>
-                <p class="font-bold text-xl text-monday-blue">
+            <div
+              class="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto"
+            >
+              <div class="flex flex-col items-start sm:items-end">
+                <p class="font-semibold text-sm sm:text-lg text-nowrap">
+                  Total Amount
+                </p>
+                <p class="font-bold text-lg sm:text-xl text-monday-blue text-nowrap">
                   {{ formattedTotalAmount }}
                 </p>
               </div>
@@ -220,7 +231,7 @@
                 @click="handleContinue"
                 :disabled="!transactionStore.isStep2Complete"
                 :class="[
-                  'btn font-semibold transition-all duration-300',
+                  'btn font-semibold transition-all duration-300 flex-1 sm:flex-initial justify-center',
                   transactionStore.isStep2Complete
                     ? 'btn-primary hover:bg-monday-blue/90'
                     : 'btn-primary text-white cursor-not-allowed opacity-50',
@@ -331,10 +342,12 @@
               class="card-assign flex flex-col rounded-3xl border border-monday-border p-4 gap-5"
               :class="{ 'opacity-50': product.stock <= 0 }"
             >
-              <div class="flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-3 w-[270px] shrink-0">
+              <div
+                class="flex flex-col xl:flex-row gap-4 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[270px] xl:shrink-0">
                   <div
-                    class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="product.image"
@@ -342,47 +355,47 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[172px] truncate">
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ product.name }}
                     </p>
-                    <p class="price font-semibold text-xl text-monday-blue">
+                    <p class="price font-semibold text-lg xl:text-xl text-monday-blue">
                       {{ product.price }}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    :src="product.categoryIcon"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="font-semibold text-lg text-nowrap w-[124px] truncate"
-                  >
-                    {{ product.category }}
-                  </p>
-                </div>
-                <div class="flex items-center gap-[6px] w-[154px] shrink-0">
-                  <img
-                    src="@/assets/images/icons/box-black.svg"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p
-                    class="stock font-semibold text-lg text-nowrap w-[124px] truncate"
-                    :class="{ 'text-red-500': product.stock <= 0 }"
-                  >
-                    {{ product.stock }} Stock
-                    <span
-                      v-if="product.stock <= 0"
-                      class="text-red-500 font-bold"
-                      >(Habis)</span
+                <div class="flex flex-wrap items-center gap-3 xl:contents">
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      :src="product.categoryIcon"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ product.category }}
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-[6px] xl:w-[154px] xl:shrink-0">
+                    <img
+                      src="@/assets/images/icons/box-black.svg"
+                      class="size-6 flex shrink-0"
+                      alt="icon"
+                    />
+                    <p
+                      class="stock font-semibold text-base xl:text-lg text-nowrap"
+                      :class="{ 'text-red-500': product.stock <= 0 }"
                     >
-                  </p>
+                      {{ product.stock }} Stock
+                      <span
+                        v-if="product.stock <= 0"
+                        class="text-red-500 font-bold"
+                        >(Habis)</span
+                      >
+                    </p>
+                  </div>
                 </div>
                 <div
-                  class="flex items-center rounded-2xl p-4 gap-3"
+                  class="flex items-center justify-center rounded-2xl p-4 gap-3 w-full xl:w-auto"
                   :class="
                     product.stock <= 0
                       ? 'bg-gray-200 text-gray-500'

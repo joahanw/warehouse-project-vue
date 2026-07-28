@@ -5,7 +5,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -23,7 +23,7 @@
           </div>
           <router-link
             to="/add-categories"
-            class="btn btn-primary font-semibold"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
           >
             Add New
             <img
@@ -86,36 +86,42 @@
           </div>
 
           <div v-else class="flex flex-col gap-5">
-            <template v-for="category in categories" :key="category.id">
-              <div class="card flex flex-wrap items-center justify-between gap-3">
-                <div class="flex flex-1 min-w-0 items-center gap-3">
+            <template v-for="(category, index) in categories" :key="category.id">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[320px] xl:shrink-0">
                   <div
-                    class="flex size-16 rounded-full bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-14 shrink-0 rounded-full bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="category.photo"
-                      class="size-[30px] object-contain"
+                      class="size-[26px] object-contain"
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[297px] truncate">
+                  <div class="flex flex-col gap-1 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ category.name }}
                     </p>
-                    <p class="font-semibold text-lg text-monday-gray">
+                    <p
+                      class="font-medium xl:font-semibold text-base xl:text-lg text-monday-gray truncate"
+                    >
                       {{ category.tagline }}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 flex-1">
-                  <img
-                    src="@/assets/images/icons/bag-black.svg"
-                    class="size-6 flex shrink-0"
-                    alt="icon"
-                  />
-                  <p class="font-semibold text-lg text-nowrap">
-                    {{ formatNumber(category.countProduct) }} Products
-                  </p>
+                <div class="flex items-center flex-wrap gap-2 xl:flex-1">
+                  <div class="flex items-center gap-2">
+                    <img
+                      src="@/assets/images/icons/bag-black.svg"
+                      class="size-5 xl:size-6 shrink-0"
+                      alt="icon"
+                    />
+                    <p class="font-semibold text-base xl:text-lg text-nowrap">
+                      {{ formatNumber(category.countProduct) }} Products
+                    </p>
+                  </div>
                   <div
                     :class="
                       getCategoryStatus(category).status === 'protected'
@@ -142,25 +148,27 @@
                     </span>
                   </div>
                 </div>
-                <router-link
-                  :to="`/edit-categories/${category.id}`"
-                  class="btn btn-black min-w-[130px] font-semibold"
-                >
-                  Edit
-                </router-link>
-                <button
-                  @click="deleteCategory(category.id, category.name)"
-                  :disabled="!getCategoryStatus(category).canDelete"
-                  :title="getCategoryStatus(category).message"
-                  class="btn btn-red-opacity min-w-[130px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <img
-                    src="@/assets/images/icons/trash-red.svg"
-                    class="flex size-6 shrink-0"
-                    alt="icon"
-                  />
-                  Delete
-                </button>
+                <div class="flex items-center gap-3 w-full xl:w-auto">
+                  <router-link
+                    :to="`/edit-categories/${category.id}`"
+                    class="btn btn-black flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
+                  >
+                    Edit
+                  </router-link>
+                  <button
+                    @click="deleteCategory(category.id, category.name)"
+                    :disabled="!getCategoryStatus(category).canDelete"
+                    :title="getCategoryStatus(category).message"
+                    class="btn btn-red-opacity flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <img
+                      src="@/assets/images/icons/trash-red.svg"
+                      class="flex size-6 shrink-0"
+                      alt="icon"
+                    />
+                    Delete
+                  </button>
+                </div>
               </div>
               <hr
                 v-if="index < categories.length - 1"

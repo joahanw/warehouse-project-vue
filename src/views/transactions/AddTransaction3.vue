@@ -7,7 +7,7 @@
     <main class="flex flex-col gap-6 flex-1">
       <div
         id="Steps"
-        class="relative flex w-full h-[127px] rounded-3xl p-[18px] bg-white"
+        class="relative flex w-full h-auto sm:h-[127px] rounded-3xl p-[18px] bg-white"
       >
         <div
           class="relative flex flex-col w-full gap-3 items-center text-center"
@@ -18,8 +18,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 1</p>
-            <p class="font-semibold text-lg">Customer Detail</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 1</p>
+            <p class="font-semibold text-xs sm:text-lg">Customer Detail</p>
           </div>
         </div>
         <div
@@ -40,8 +40,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 2</p>
-            <p class="font-semibold text-lg">Assign Products</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 2</p>
+            <p class="font-semibold text-xs sm:text-lg">Assign Products</p>
           </div>
         </div>
         <div
@@ -62,8 +62,8 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray">Step 3</p>
-            <p class="font-semibold text-lg">Review Transaction</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 3</p>
+            <p class="font-semibold text-xs sm:text-lg">Review Transaction</p>
           </div>
         </div>
       </div>
@@ -81,10 +81,12 @@
               :key="product.id"
               class="card flex flex-col w-full rounded-3xl border border-monday-border p-4 gap-5"
             >
-              <div class="flex flex-wrap items-center justify-between gap-6">
-                <div class="flex items-center gap-3 w-[316px] shrink-0">
+              <div
+                class="flex flex-col xl:flex-row gap-3 xl:gap-6 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[316px] xl:shrink-0">
                   <div
-                    class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="product.image"
@@ -92,11 +94,11 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[218px] truncate">
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ product.name }}
                     </p>
-                    <p class="price font-semibold text-xl text-monday-blue">
+                    <p class="price font-semibold text-lg xl:text-xl text-monday-blue">
                       {{ product.price }}
                       <span class="text-monday-gray"
                         >({{ product.quantity }}x)</span
@@ -110,7 +112,7 @@
                     class="size-6 flex shrink-0"
                     alt="icon"
                   />
-                  <p class="font-semibold text-lg text-nowrap">
+                  <p class="font-semibold text-base xl:text-lg text-nowrap">
                     {{ product.category }}
                   </p>
                 </div>

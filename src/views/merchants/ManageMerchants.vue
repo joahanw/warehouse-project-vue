@@ -5,7 +5,7 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex items-center justify-between px-[18px]">
+        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -23,7 +23,7 @@
           </div>
           <router-link
             to="/add-merchants"
-            class="btn btn-primary font-semibold"
+            class="btn btn-primary font-semibold w-full sm:w-auto"
           >
             Add New
             <img
@@ -67,11 +67,13 @@
           </div>
           <!-- Merchants List -->
           <div v-else class="flex flex-col gap-5">
-            <template v-for="merchant in merchants" :key="merchant.id">
-              <div class="card flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-3 w-[326px] shrink-0">
+            <template v-for="(merchant, index) in merchants" :key="merchant.id">
+              <div
+                class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
+              >
+                <div class="flex items-center gap-3 w-full xl:w-[326px] xl:shrink-0">
                   <div
-                    class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
+                    class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
                       :src="merchant.photo"
@@ -79,42 +81,42 @@
                       alt="icon"
                     />
                   </div>
-                  <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl w-[228px] truncate">
+                  <div class="flex flex-col gap-1 xl:gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ merchant.name }}
                     </p>
                     <p
-                      class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+                      class="flex items-center gap-1 font-medium text-base xl:text-lg text-monday-gray"
                     >
                       <img
                         src="@/assets/images/icons/user-thin-grey.svg"
                         class="size-6 flex shrink-0"
                         alt="icon"
                       />
-                      <span>{{ merchant.keeperName }}</span>
+                      <span class="truncate">{{ merchant.keeperName }}</span>
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 min-w-[266px]">
+                <div class="flex items-center gap-2 xl:min-w-[266px]">
                   <img
                     src="@/assets/images/icons/bag-black.svg"
                     class="size-6 flex shrink-0"
                     alt="icon"
                   />
-                  <p class="font-semibold text-lg text-nowrap">
+                  <p class="font-semibold text-base xl:text-lg text-nowrap">
                     {{ merchant.merchantProducts.length }} Products
                   </p>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 xl:gap-4 w-full xl:w-auto">
                   <router-link
                     :to="`/detail-merchants/${merchant.id}`"
-                    class="btn btn-primary-opacity min-w-[130px] font-semibold"
+                    class="btn btn-primary-opacity flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     Details
                   </router-link>
                   <router-link
                     :to="`/edit-merchants/${merchant.id}`"
-                    class="btn btn-black min-w-[130px] font-semibold"
+                    class="btn btn-black flex-1 xl:flex-initial xl:min-w-[130px] justify-center font-semibold"
                   >
                     <img
                       src="@/assets/images/icons/edit-white.svg"
