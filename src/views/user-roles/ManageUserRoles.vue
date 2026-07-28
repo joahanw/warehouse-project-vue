@@ -69,7 +69,7 @@
 
           <div v-else-if="userRoles.length > 0" class="flex flex-col gap-5">
             <template v-for="userRole in userRoles" :key="userRole.id">
-              <div class="card flex items-center justify-between gap-6">
+              <div class="card flex flex-wrap items-center justify-between gap-6">
                 <div class="flex items-center gap-3">
                   <div
                     class="flex size-[76px] rounded-full bg-monday-background items-center justify-center overflow-hidden"

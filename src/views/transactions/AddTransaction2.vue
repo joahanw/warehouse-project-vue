@@ -130,7 +130,7 @@
             <div
               v-for="(product, index) in assignedProducts"
               :key="product.id"
-              class="card flex items-center justify-between gap-6"
+              class="card flex flex-wrap items-center justify-between gap-6"
             >
               <div class="flex items-center gap-3 w-[340px] shrink-0">
                 <div
@@ -331,7 +331,7 @@
               class="card-assign flex flex-col rounded-3xl border border-monday-border p-4 gap-5"
               :class="{ 'opacity-50': product.stock <= 0 }"
             >
-              <div class="flex items-center justify-between gap-6">
+              <div class="flex flex-wrap items-center justify-between gap-6">
                 <div class="flex items-center gap-3 w-[270px] shrink-0">
                   <div
                     class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"

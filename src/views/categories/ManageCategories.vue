@@ -87,8 +87,8 @@
 
           <div v-else class="flex flex-col gap-5">
             <template v-for="category in categories" :key="category.id">
-              <div class="card flex items-center justify-between gap-3">
-                <div class="flex w-full items-center gap-3">
+              <div class="card flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-1 min-w-0 items-center gap-3">
                   <div
                     class="flex size-16 rounded-full bg-monday-background items-center justify-center overflow-hidden"
                   >
@@ -107,7 +107,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 w-full">
+                <div class="flex items-center gap-2 flex-1">
                   <img
                     src="@/assets/images/icons/bag-black.svg"
                     class="size-6 flex shrink-0"

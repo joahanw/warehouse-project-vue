@@ -103,7 +103,7 @@
             <div
               v-for="(product, index) in merchantProducts"
               :key="product.id"
-              class="card flex items-center justify-between gap-6"
+              class="card flex flex-wrap items-center justify-between gap-6"
             >
               <div class="flex items-center gap-3 w-[340px] shrink-0">
                 <div

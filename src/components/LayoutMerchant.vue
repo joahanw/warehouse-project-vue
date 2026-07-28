@@ -231,7 +231,7 @@
     </aside>
     <div
       id="Content"
-      class="flex flex-col flex-1 min-w-0 p-4 lg:p-6 pt-0 overflow-y-auto"
+      class="flex flex-col flex-1 min-w-0 p-4 lg:p-6 pt-0 overflow-y-auto overflow-x-auto"
     >
       <div
         id="Top-Bar"

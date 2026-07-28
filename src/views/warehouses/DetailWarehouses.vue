@@ -85,7 +85,7 @@
           </div>
           <div v-else class="flex flex-col gap-5">
             <template v-for="product in warehouseProducts" :key="product.id">
-              <div class="card flex items-center justify-between gap-6">
+              <div class="card flex flex-wrap items-center justify-between gap-6">
                 <div class="flex items-center gap-3 w-[260px] shrink-0">
                   <div
                     class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"

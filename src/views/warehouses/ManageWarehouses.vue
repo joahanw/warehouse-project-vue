@@ -55,7 +55,7 @@
 
           <div v-else class="flex flex-col gap-5">
             <template v-for="warehouse in warehouses" :key="warehouse.id">
-              <div class="card flex items-center justify-between gap-3">
+              <div class="card flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-3 w-[360px] shrink-0">
                   <div
                     class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
@@ -75,7 +75,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 w-full justify-center">
+                <div class="flex items-center gap-2 flex-1 justify-center">
                   <img
                     src="@/assets/images/icons/bag-black.svg"
                     class="size-6 flex shrink-0"

@@ -1,7 +1,7 @@
 <template>
   <Layout pageTitle="Overview">
     <main class="flex flex-col gap-6 flex-1">
-      <section class="grid grid-cols-3 gap-6">
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           id="Total-Revenue"
           class="flex flex-col rounded-3xl p-[18px] gap-5 bg-white"
@@ -46,7 +46,7 @@
         </div>
         <div
           id="Products-Sold"
-          class="flex flex-col rounded-3xl p-[18px] gap-5 bg-white"
+          class="sm:col-span-2 lg:col-span-1 flex flex-col rounded-3xl p-[18px] gap-5 bg-white"
         >
           <div
             class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
@@ -65,8 +65,8 @@
           </div>
         </div>
       </section>
-      <div class="flex gap-6 flex-1">
-        <section class="flex flex-col gap-6 w-[262px] shrink-0">
+      <div class="flex flex-col lg:flex-row gap-6 flex-1">
+        <section class="flex flex-col gap-6 w-full lg:w-[262px] lg:shrink-0">
           <div class="flex flex-col rounded-3xl p-[18px] gap-9 blue-gradient">
             <div class="relative w-fit">
               <div
@@ -221,9 +221,9 @@
                       product, productIndex
                     ) in transaction.transactionProducts"
                     :key="product.id"
-                    class="card flex items-center justify-between gap-3"
+                    class="card flex flex-wrap items-center justify-between gap-3"
                   >
-                    <div class="flex items-center gap-3 w-full">
+                    <div class="flex items-center gap-3 flex-1 min-w-0">
                       <div
                         class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                       >
@@ -245,7 +245,7 @@
                         </p>
                       </div>
                     </div>
-                    <div class="flex items-center gap-[6px] w-full">
+                    <div class="flex items-center gap-[6px] flex-1">
                       <img
                         :src="product.product.category?.name"
                         class="size-6 flex shrink-0"

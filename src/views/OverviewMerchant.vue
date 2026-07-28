@@ -21,7 +21,7 @@
         </button>
       </div>
 
-      <section class="grid grid-cols-3 gap-6">
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           v-if="dashboardLoading"
           class="col-span-3 flex items-center justify-center py-12"
@@ -97,7 +97,7 @@
           </div>
           <div
             id="Products-Sold"
-            class="flex flex-col rounded-3xl p-[18px] gap-5 bg-white"
+            class="sm:col-span-2 lg:col-span-1 flex flex-col rounded-3xl p-[18px] gap-5 bg-white"
           >
             <div
               class="flex size-14 rounded-full bg-monday-blue/10 items-center justify-center"
@@ -215,9 +215,9 @@
                     product, productIndex
                   ) in transaction.transactionProducts"
                   :key="product.id"
-                  class="card flex items-center justify-between gap-3"
+                  class="card flex flex-wrap items-center justify-between gap-3"
                 >
-                  <div class="flex items-center gap-3 w-full">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div
                       class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                     >
@@ -239,7 +239,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-[6px] w-full">
+                  <div class="flex items-center gap-[6px] flex-1">
                     <img
                       :src="product.product.category?.photo"
                       class="size-6 flex shrink-0"

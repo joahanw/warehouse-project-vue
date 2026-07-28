@@ -84,22 +84,24 @@
 
           <div v-else class="flex flex-col gap-5">
             <template v-for="(role, index) in roles" :key="role.id">
-              <div class="card flex items-center justify-between gap-3">
-                <div class="flex items-center gap-3 w-full">
+              <div class="card flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3 w-[300px] shrink-0">
                   <div
-                    class="flex size-16 rounded-2xl bg-monday-gray-background items-center justify-center overflow-hidden"
+                    class="flex size-[54px] rounded-2xl bg-monday-gray-background items-center justify-center"
                   >
                     <img
                       src="@/assets/images/icons/user-octagon-grey.svg"
-                      class="size-6 object-contain"
+                      class="flex size-6 shrink-0"
                       alt="icon"
                     />
                   </div>
                   <div class="flex flex-col gap-2 flex-1">
-                    <p class="font-semibold text-xl">{{ role.name }}</p>
+                    <p class="font-semibold text-xl w-[220px] truncate">
+                      {{ role.name }}
+                    </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2 w-full">
+                <div class="flex items-center gap-2 min-w-[187px]">
                   <img
                     src="@/assets/images/icons/profile-2user-black.svg"
                     class="size-6 flex shrink-0"

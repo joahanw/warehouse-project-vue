@@ -172,7 +172,7 @@
                   ) in transaction.transactionProducts"
                   :key="product.id"
                 >
-                  <div class="card flex items-center justify-between gap-3">
+                  <div class="card flex flex-wrap items-center justify-between gap-3">
                     <div class="flex items-center gap-3 w-[420px] shrink-0">
                       <div
                         class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
