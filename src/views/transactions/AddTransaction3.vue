@@ -212,8 +212,8 @@
                   :icon="moneyGreyIcon"
                   required
                 >
-                  <option value="qris">Midtrans</option>
                   <option value="bca_qris_static">BCA QRIS</option>
+                  <option value="qris">Midtrans</option>
                 </FormSelect>
                 <div
                   class="flex flex-col w-full items-center justify-between gap-5 rounded-2xl border border-monday-border p-4"
