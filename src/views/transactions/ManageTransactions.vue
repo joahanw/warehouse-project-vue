@@ -143,6 +143,55 @@
                     <span>{{ transaction.phone }}</span>
                   </p>
                 </div>
+                <div
+                  v-if="canConfirmPayment(transaction)"
+                  class="flex items-center gap-2 shrink-0"
+                >
+                  <button
+                    type="button"
+                    @click="openConfirmDialog(transaction, 'failed')"
+                    :disabled="confirmingId === transaction.id"
+                    class="flex items-center gap-1.5 rounded-full bg-monday-red/10 text-monday-red px-3.5 py-2 font-semibold text-sm ring-1 ring-inset ring-monday-red/20 transition-all duration-200 hover:bg-monday-red hover:text-white hover:ring-monday-red active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    <svg
+                      class="size-4 shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18 6L6 18M6 6l12 12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    Failed
+                  </button>
+                  <button
+                    type="button"
+                    @click="openConfirmDialog(transaction, 'success')"
+                    :disabled="confirmingId === transaction.id"
+                    class="flex items-center gap-1.5 rounded-full bg-monday-blue/10 text-monday-blue px-3.5 py-2 font-semibold text-sm ring-1 ring-inset ring-monday-blue/20 transition-all duration-200 hover:bg-monday-blue hover:text-white hover:ring-monday-blue active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    <svg
+                      class="size-4 shrink-0"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 6L9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    Success
+                  </button>
+                </div>
               </div>
             </div>
             <hr class="border-monday-border" />
@@ -326,12 +375,124 @@
         </div>
       </div>
     </div>
+
+    <Transition name="fade">
+      <div
+        v-if="confirmDialog.open"
+        class="modal flex flex-1 items-center justify-center h-full fixed top w-full z-50 left-0 p-4"
+      >
+        <div
+          @click="!isConfirming && closeConfirmDialog()"
+          class="backdrop absolute w-full h-full bg-[#292D32B2]"
+        ></div>
+        <Transition name="pop" appear>
+          <div
+            class="relative flex flex-col w-full max-w-[380px] rounded-3xl p-6 gap-5 bg-white text-center items-center"
+          >
+            <div
+              :class="
+                confirmDialog.status === 'success'
+                  ? 'bg-monday-blue/10 text-monday-blue'
+                  : 'bg-monday-red/10 text-monday-red'
+              "
+              class="flex size-16 rounded-full items-center justify-center shrink-0"
+            >
+              <svg
+                v-if="confirmDialog.status === 'success'"
+                class="size-8"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 6L9 17l-5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <svg
+                v-else
+                class="size-8"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6l12 12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="flex flex-col gap-2">
+              <p class="font-semibold text-xl">
+                {{
+                  confirmDialog.status === "success"
+                    ? "Confirm Payment Success?"
+                    : "Confirm Payment Failed?"
+                }}
+              </p>
+              <p class="font-medium text-monday-gray leading-[150%]">
+                Transaksi
+                <span class="font-semibold text-monday-black">{{
+                  confirmDialog.transaction?.name
+                }}</span>
+                senilai
+                <span class="font-semibold text-monday-black"
+                  >Rp
+                  {{
+                    formaterNumber(confirmDialog.transaction?.grandTotal)
+                  }}</span
+                >
+                akan ditandai sebagai
+                <span class="font-semibold">{{
+                  confirmDialog.status === "success" ? "Success" : "Failed"
+                }}</span>. Tindakan ini tidak dapat dibatalkan.
+              </p>
+            </div>
+            <div class="flex items-center gap-3 w-full">
+              <button
+                type="button"
+                @click="closeConfirmDialog"
+                :disabled="isConfirming"
+                class="btn btn-primary-opacity font-semibold flex-1 justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                @click="submitConfirmDialog"
+                :disabled="isConfirming"
+                :class="
+                  confirmDialog.status === 'success'
+                    ? 'btn-primary'
+                    : 'btn-red'
+                "
+                class="btn font-semibold flex-1 justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <img
+                  v-if="isConfirming"
+                  src="@/assets/images/icons/loading.svg"
+                  class="size-5 animate-spin"
+                  alt="loading"
+                />
+                {{ isConfirming ? "Processing..." : "Yes, Confirm" }}
+              </button>
+            </div>
+          </div>
+        </Transition>
+      </div>
+    </Transition>
   </LayoutMerchant>
 </template>
 
 <script setup>
 import LayoutMerchant from "@/components/LayoutMerchant.vue";
-import { getTransactions } from "@/js/api/transaction";
+import { confirmPayment, getTransactions } from "@/js/api/transaction";
 import { useAuthStore } from "@/stores/auth";
 import { computed, onMounted, ref } from "vue";
 import arrowCircleDownIcon from "@/assets/images/icons/arrow-circle-down.svg";
@@ -344,6 +505,9 @@ const transactions = ref([]);
 const expandedSections = ref([]);
 const showModal = ref(false);
 const selectedProduct = ref({});
+const confirmingId = ref(null);
+const confirmDialog = ref({ open: false, transaction: null, status: null });
+const isConfirming = computed(() => confirmingId.value !== null);
 
 const merchantData = computed(() => {
   return authStore.getMerchantData();
@@ -436,6 +600,38 @@ const closeModal = () => {
   showModal.value = false;
 };
 
+const canConfirmPayment = (transaction) => {
+  return (
+    transaction.paymentMethod === "bca_qris_static" &&
+    getPaymentStatusBadge(transaction.paymentStatus).label === "Pending"
+  );
+};
+
+const openConfirmDialog = (transaction, status) => {
+  confirmDialog.value = { open: true, transaction, status };
+};
+
+const closeConfirmDialog = () => {
+  confirmDialog.value = { open: false, transaction: null, status: null };
+};
+
+const submitConfirmDialog = async () => {
+  const { transaction, status } = confirmDialog.value;
+  if (!transaction || !status) return;
+
+  try {
+    confirmingId.value = transaction.id;
+    await confirmPayment(transaction.id, status);
+    transaction.paymentStatus = status;
+    closeConfirmDialog();
+  } catch (error) {
+    console.error("Error confirming payment:", error);
+    alert("Failed to confirm payment. Please try again.");
+  } finally {
+    confirmingId.value = null;
+  }
+};
+
 onMounted(async () => {
   const roles = authStore.userRole?.toLowerCase().split(",");
   if (!merchantData.value && roles.includes("keeper")) {
@@ -446,3 +642,30 @@ onMounted(async () => {
   fetchTransactions();
 });
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.pop-enter-active {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.pop-leave-active {
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+.pop-enter-from,
+.pop-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+</style>

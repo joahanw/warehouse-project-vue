@@ -16,8 +16,18 @@ export const createTransaction = (data, options = {}) => {
   return apiService.post("/api/transactions", data, options);
 };
 
+export const confirmPayment = (transactionId, status, options = {}) => {
+  return apiService.post(
+    `/api/transactions/${transactionId}/confirm-payment`,
+    { status },
+    options,
+  );
+};
+
 export default {
   getDashboardData,
   getTransactions,
   getTransactionById,
+  createTransaction,
+  confirmPayment,
 };

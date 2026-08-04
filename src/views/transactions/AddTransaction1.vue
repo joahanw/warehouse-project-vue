@@ -18,7 +18,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 1</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 1
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Customer Detail</p>
           </div>
         </div>
@@ -40,7 +42,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 2</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 2
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Assign Products</p>
           </div>
         </div>
@@ -62,7 +66,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 3</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 3
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Review Transaction</p>
           </div>
         </div>
@@ -80,7 +86,7 @@
             required="true"
           />
           <FormInput
-            v-model="formData.phoneNumber"
+            v-model="phoneNumberModel"
             label="Phone Number"
             :icon="callGreyIcon"
             required="true"
@@ -210,6 +216,15 @@ const formData = reactive({
   shippingCost: transactionStore.customerInfo.shippingCost,
   notes: transactionStore.customerInfo.notes,
   address: transactionStore.customerInfo.address,
+});
+
+const phoneNumberModel = computed({
+  get: () => formData.phoneNumber,
+  set: (value) => {
+    formData.phoneNumber = value.startsWith("0")
+      ? `62${value.slice(1)}`
+      : value;
+  },
 });
 
 const isFormValid = computed(() => {

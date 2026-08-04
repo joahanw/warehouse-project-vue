@@ -18,7 +18,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 1</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 1
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Customer Detail</p>
           </div>
         </div>
@@ -40,7 +42,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 2</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 2
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Assign Products</p>
           </div>
         </div>
@@ -62,7 +66,9 @@
             alt="icon"
           />
           <div class="flex flex-col gap-1">
-            <p class="font-medium text-monday-gray text-xs sm:text-base">Step 3</p>
+            <p class="font-medium text-monday-gray text-xs sm:text-base">
+              Step 3
+            </p>
             <p class="font-semibold text-xs sm:text-lg">Review Transaction</p>
           </div>
         </div>
@@ -84,7 +90,9 @@
               <div
                 class="flex flex-col xl:flex-row gap-3 xl:gap-6 xl:items-center xl:justify-between"
               >
-                <div class="flex items-center gap-3 w-full xl:w-[316px] xl:shrink-0">
+                <div
+                  class="flex items-center gap-3 w-full xl:w-[316px] xl:shrink-0"
+                >
                   <div
                     class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
@@ -98,7 +106,9 @@
                     <p class="font-semibold text-lg xl:text-xl truncate">
                       {{ product.name }}
                     </p>
-                    <p class="price font-semibold text-lg xl:text-xl text-monday-blue">
+                    <p
+                      class="price font-semibold text-lg xl:text-xl text-monday-blue"
+                    >
                       {{ product.price }}
                       <span class="text-monday-gray"
                         >({{ product.quantity }}x)</span
@@ -134,9 +144,7 @@
             </div>
           </div>
           <div class="flex flex-col gap-6 w-full lg:w-[392px] lg:shrink-0">
-            <div
-              class="flex w-full h-fit rounded-3xl p-[18px] gap-3 bg-white"
-            >
+            <div class="flex w-full h-fit rounded-3xl p-[18px] gap-3 bg-white">
               <div
                 class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
               >
@@ -198,6 +206,15 @@
               </div>
               <div class="flex flex-col gap-5">
                 <p class="font-semibold text-lg">Payment Information</p>
+                <FormSelect
+                  v-model="paymentMethod"
+                  label="Payment Method"
+                  :icon="moneyGreyIcon"
+                  required
+                >
+                  <option value="qris">Midtrans</option>
+                  <option value="bca_qris_static">BCA QRIS</option>
+                </FormSelect>
                 <div
                   class="flex flex-col w-full items-center justify-between gap-5 rounded-2xl border border-monday-border p-4"
                 >
@@ -348,6 +365,8 @@
 </template>
 
 <script setup>
+import moneyGreyIcon from "@/assets/images/icons/money-grey.svg";
+import FormSelect from "@/components/FormSelect.vue";
 import LayoutMerchant from "@/components/LayoutMerchant.vue";
 import { createTransaction } from "@/js/api/transaction";
 import { buildOrderInvoiceHtml } from "@/js/orderInvoiceTemplate";
@@ -363,6 +382,7 @@ const showQrModal = ref(false);
 const qrCodeUrl = ref("");
 const currentOrderId = ref("");
 const currentTransactionData = ref(null);
+const paymentMethod = ref("qris");
 
 const customerInfo = computed(() => transactionStore.customerInfo);
 const assignedProducts = computed(() => transactionStore.assignedProducts);
@@ -430,6 +450,7 @@ const prepareTransactionData = () => {
     notes: customerInfo.value.notes,
     shippingCost: customerInfo.value.shippingCost,
     products: products,
+    paymentMethod: paymentMethod.value,
     callback_url: callbackUrl, // Add callback URL for Midtrans
   };
 };
