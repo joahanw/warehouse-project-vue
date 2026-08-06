@@ -382,7 +382,7 @@ const showQrModal = ref(false);
 const qrCodeUrl = ref("");
 const currentOrderId = ref("");
 const currentTransactionData = ref(null);
-const paymentMethod = ref("qris");
+const paymentMethod = ref("bca_qris_static");
 
 const customerInfo = computed(() => transactionStore.customerInfo);
 const assignedProducts = computed(() => transactionStore.assignedProducts);

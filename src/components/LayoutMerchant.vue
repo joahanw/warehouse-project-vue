@@ -110,6 +110,36 @@
               </li>
               <li
                 class="group"
+                :class="{ active: $route.path === '/transactions/summary' }"
+              >
+                <router-link
+                  to="/transactions/summary"
+                  class="flex items-center w-full min-h-14 gap-2 rounded-2xl overflow-hidden py-[10px] pl-4 group-[&.active]:bg-monday-blue/10 transition-300"
+                >
+                  <div class="relative flex size-6 shrink-0">
+                    <img
+                      src="@/assets/images/icons/document-text-grey.svg"
+                      class="size-6 absolute opacity-100 group-[&.active]:opacity-0 transition-300"
+                      alt="icon"
+                    />
+                    <img
+                      src="@/assets/images/icons/document-text-blue-fill.svg"
+                      class="size-6 absolute opacity-0 group-[&.active]:opacity-100 transition-300"
+                      alt="icon"
+                    />
+                  </div>
+                  <p
+                    class="font-medium group-[&.active]:text-monday-blue transition-300 w-full"
+                  >
+                    Summary
+                  </p>
+                  <div
+                    class="w-2 h-9 shrink-0 rounded-l-xl bg-monday-blue hidden group-[&.active]:flex transition-300"
+                  ></div>
+                </router-link>
+              </li>
+              <li
+                class="group"
                 :class="{ active: $route.path === '/my-merchant' }"
               >
                 <router-link

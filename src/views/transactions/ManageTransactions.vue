@@ -71,17 +71,25 @@
               View and update your transactions list here.
             </p>
           </div>
-          <router-link
-            to="/transaction/add-1"
-            class="btn btn-primary font-semibold w-full sm:w-auto"
-          >
-            Add New
-            <img
-              src="@/assets/images/icons/add-square-white.svg"
-              class="flex sixe-6 shrink-0"
-              alt="icon"
-            />
-          </router-link>
+          <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <router-link
+              to="/transactions/summary"
+              class="btn btn-primary-opacity font-semibold w-full sm:w-auto justify-center"
+            >
+              View Summary
+            </router-link>
+            <router-link
+              to="/transaction/add-1"
+              class="btn btn-primary font-semibold w-full sm:w-auto justify-center"
+            >
+              Add New
+              <img
+                src="@/assets/images/icons/add-square-white.svg"
+                class="flex sixe-6 shrink-0"
+                alt="icon"
+              />
+            </router-link>
+          </div>
         </div>
         <hr class="border-monday-border" />
         <div id="Product-List" class="flex flex-col px-4 gap-5 flex-1">

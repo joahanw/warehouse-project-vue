@@ -290,6 +290,15 @@ const routes = [
     },
   },
   {
+    path: "/transactions/summary",
+    name: "TransactionsSummary",
+    component: () => import("@/views/transactions/Summary.vue"),
+    meta: {
+      requiresAuth: true,
+      roles: ["keeper"],
+    },
+  },
+  {
     path: "/transaction/add-1",
     name: "AddTransaction1",
     component: () => import("@/views/transactions/AddTransaction1.vue"),
