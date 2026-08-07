@@ -21,6 +21,32 @@
 
     <div class="flex flex-wrap items-center gap-3">
       <div
+        v-if="merchants.length"
+        class="flex items-center gap-2 h-14 rounded-2xl border border-monday-border pl-4 pr-2"
+      >
+        <svg
+          class="size-5 shrink-0 opacity-60"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 21V7l9-4 9 4v14M9 21v-6h6v6M3 10h18"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <select v-model="merchantId" class="appearance-none font-semibold outline-none bg-transparent pr-2">
+          <option value="">All Merchants</option>
+          <option v-for="item in merchants" :key="item.id" :value="String(item.id)">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+
+      <div
         class="flex items-center gap-2 h-14 rounded-2xl border border-monday-border pl-4 pr-2"
       >
         <svg
@@ -138,6 +164,7 @@
 defineProps({
   months: { type: Array, default: () => [] },
   years: { type: Array, default: () => [] },
+  merchants: { type: Array, default: () => [] },
   loading: { type: Boolean, default: false },
   disableExport: { type: Boolean, default: false },
 });
@@ -147,5 +174,6 @@ defineEmits(["export", "refresh"]);
 const search = defineModel("search", { type: String, default: "" });
 const month = defineModel("month", { type: String, default: "" });
 const year = defineModel("year", { type: String, default: "" });
+const merchantId = defineModel("merchantId", { type: String, default: "" });
 const sortDirection = defineModel("sortDirection", { type: String, default: "desc" });
 </script>

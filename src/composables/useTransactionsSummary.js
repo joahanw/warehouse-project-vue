@@ -14,7 +14,9 @@ import {
 } from "@/js/utils/paymentStatus";
 import { downloadCsv } from "@/js/utils/csv";
 
-export const useTransactionsSummary = (merchantId) => {
+export const useTransactionsSummary = (merchantId, options = {}) => {
+  const { requireMerchant = true } = options;
+
   const transactions = ref([]);
   const loading = ref(false);
   const error = ref(null);
@@ -26,7 +28,7 @@ export const useTransactionsSummary = (merchantId) => {
 
   const fetchTransactions = async () => {
     const merchantIdValue = unref(merchantId);
-    if (!merchantIdValue) {
+    if (requireMerchant && !merchantIdValue) {
       transactions.value = [];
       return;
     }
@@ -37,7 +39,7 @@ export const useTransactionsSummary = (merchantId) => {
       let query = `?sortBy=createdAt&sortDirection=${sortDirection.value}&pageSize=1000`;
       if (selectedYear.value) query += `&year=${selectedYear.value}`;
       if (selectedMonth.value) query += `&month=${selectedMonth.value}`;
-      query += `&merchantId=${merchantIdValue}`;
+      if (merchantIdValue) query += `&merchantId=${merchantIdValue}`;
 
       const response = await getTransactions(query);
       transactions.value = response.data?.content || [];
@@ -50,7 +52,7 @@ export const useTransactionsSummary = (merchantId) => {
     }
   };
 
-  watch([selectedMonth, selectedYear], () => {
+  watch([selectedMonth, selectedYear, () => unref(merchantId)], () => {
     fetchTransactions();
   });
 

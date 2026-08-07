@@ -137,6 +137,15 @@ const routes = [
     },
   },
   {
+    path: "/summary",
+    name: "TransactionsSummaryManager",
+    component: () => import("@/views/Summary.vue"),
+    meta: {
+      requiresAuth: true,
+      roles: ["manager"],
+    },
+  },
+  {
     path: "/add-merchants",
     name: "AddMerchants",
     component: () => import("@/views/merchants/AddMerchants.vue"),
