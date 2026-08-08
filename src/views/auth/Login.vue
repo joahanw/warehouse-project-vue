@@ -117,7 +117,7 @@
 
       <div class="hidden lg:flex flex-1 overflow-hidden">
         <img
-          src="../../assets/images/backgrounds/bg-salt-bread.png"
+          src="../../assets/images/backgrounds/bg-salt-bread.webp"
           class="size-full object-cover object-left-top"
           alt="image"
         />

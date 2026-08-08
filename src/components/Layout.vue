@@ -487,7 +487,7 @@
               {{ breadcrumbText }}
             </router-link>
           </div>
-          <div class="flex items-center flex-nowrap gap-2 lg:gap-3">
+          <div class="hidden sm:flex items-center flex-nowrap gap-2 lg:gap-3">
             <a href="/overview">
               <div
                 class="flex size-11 lg:size-14 rounded-full bg-monday-gray-background items-center justify-center overflow-hidden"
@@ -511,6 +511,7 @@
               </div>
             </a>
             <div class="relative w-fit">
+
               <div
                 class="flex size-11 lg:size-14 rounded-full bg-monday-lime-green items-center justify-center overflow-hidden"
               >
