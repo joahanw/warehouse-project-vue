@@ -192,6 +192,16 @@
                       />
                       <span>{{ customerInfo.phoneNumber }}</span>
                     </p>
+                    <p
+                      class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+                    >
+                      <img
+                        src="@/assets/images/icons/calendar-grey.svg"
+                        class="size-6 flex shrink-0"
+                        alt="icon"
+                      />
+                      <span>{{ customerInfo.deliveryDate }}</span>
+                    </p>
                   </div>
                   <div
                     class="flex size-[56px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
@@ -449,6 +459,7 @@ const prepareTransactionData = () => {
     merchantId: customerInfo.value.merchantId,
     notes: customerInfo.value.notes,
     shippingCost: customerInfo.value.shippingCost,
+    deliveryDate: customerInfo.value.deliveryDate,
     products: products,
     paymentMethod: paymentMethod.value,
     callback_url: callbackUrl, // Add callback URL for Midtrans

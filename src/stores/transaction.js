@@ -9,6 +9,7 @@ export const useTransactionStore = defineStore("transaction", {
       address: "",
       notes: "",
       shippingCost: 0,
+      deliveryDate: "",
       merchantId: null,
       merchant: null,
     },
@@ -175,6 +176,9 @@ export const useTransactionStore = defineStore("transaction", {
         phoneNumber: "",
         email: "",
         address: "",
+        notes: "",
+        shippingCost: 0,
+        deliveryDate: "",
         merchantId: null,
         merchant: null,
       };

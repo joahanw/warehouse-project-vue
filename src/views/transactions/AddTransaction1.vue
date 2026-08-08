@@ -109,6 +109,14 @@
             step="10000"
           />
           <FormInput
+            v-model="formData.deliveryDate"
+            label="Delivery Date"
+            :icon="calendarGreyIcon"
+            required="true"
+            type="date"
+            :min="todayDate"
+          />
+          <FormInput
             v-model="formData.notes"
             label="Notes"
             :icon="note2GreyIcon"
@@ -185,6 +193,7 @@
 </template>
 
 <script setup>
+import calendarGreyIcon from "@/assets/images/icons/calendar-grey.svg";
 import callGreyIcon from "@/assets/images/icons/call-grey.svg";
 import locationGreyIcon from "@/assets/images/icons/location-grey.svg";
 import moneysGreyIcon from "@/assets/images/icons/moneys-grey.svg";
@@ -209,11 +218,14 @@ const merchants = ref([]);
 const loading = ref(true);
 const showEmptyState = ref(false);
 
+const todayDate = new Date().toISOString().split("T")[0];
+
 const formData = reactive({
   customerName: transactionStore.customerInfo.customerName,
   phoneNumber: transactionStore.customerInfo.phoneNumber,
   email: transactionStore.customerInfo.email,
   shippingCost: transactionStore.customerInfo.shippingCost,
+  deliveryDate: transactionStore.customerInfo.deliveryDate,
   notes: transactionStore.customerInfo.notes,
   address: transactionStore.customerInfo.address,
 });
@@ -234,6 +246,7 @@ const isFormValid = computed(() => {
     formData.email.trim() &&
     Number(formData.shippingCost) >= 0 &&
     formData.shippingCost !== "" &&
+    formData.deliveryDate.trim() &&
     selectedMerchant.value
   );
 });
@@ -248,6 +261,7 @@ const updateFormData = () => {
     phoneNumber: formData.phoneNumber,
     email: formData.email,
     shippingCost: formData.shippingCost,
+    deliveryDate: formData.deliveryDate,
     notes: formData.notes,
     address: formData.address,
     merchantId: selectedMerchant.value?.id || null,
@@ -313,7 +327,8 @@ const handleSubmit = async () => {
     !formData.customerName.trim() ||
     !formData.phoneNumber.trim() ||
     !formData.email.trim() ||
-    !formData.shippingCost.trim()
+    !formData.shippingCost.trim() ||
+    !formData.deliveryDate.trim()
   ) {
     alert("Please fill in all required fields");
     return;
@@ -337,6 +352,7 @@ onMounted(() => {
     formData.phoneNumber = transactionStore.customerInfo.phoneNumber;
     formData.email = transactionStore.customerInfo.email;
     formData.shippingCost = transactionStore.customerInfo.shippingCost;
+    formData.deliveryDate = transactionStore.customerInfo.deliveryDate;
     formData.notes = transactionStore.customerInfo.notes;
     formData.address = transactionStore.customerInfo.address;
   }
