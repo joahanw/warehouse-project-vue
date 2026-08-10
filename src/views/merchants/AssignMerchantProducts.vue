@@ -251,7 +251,7 @@ export default {
       this.isLoadingProducts = true;
 
       try {
-        const response = await getProducts();
+        const response = await getProducts("?pageSize=1000");
         this.products = response.data.content || [];
       } catch (error) {
         console.error("Error loading products:", error);

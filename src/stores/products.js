@@ -36,7 +36,7 @@ export const useProductStore = defineStore("products", {
       this.error = null;
 
       try {
-        const response = await getProducts();
+        const response = await getProducts("?pageSize=1000");
         this.products = response.data?.content || response || [];
       } catch (error) {
         console.error("Error fetching products:", error);

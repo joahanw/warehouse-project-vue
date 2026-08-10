@@ -1,7 +1,7 @@
 import apiService from "../api";
 
-export const getProducts = (options = {}) => {
-  return apiService.get("/api/products", options);
+export const getProducts = (query = "", options = {}) => {
+  return apiService.get(`/api/products${query}`, options);
 };
 
 export const getProductById = (id, options = {}) => {

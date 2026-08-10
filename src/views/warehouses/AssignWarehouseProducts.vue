@@ -183,7 +183,7 @@ export default {
   methods: {
     async loadAvailableProducts() {
       try {
-        const response = await getProducts();
+        const response = await getProducts("?pageSize=1000");
         this.availableProducts = response.data?.content || response || [];
       } catch (error) {
         console.error("Error loading available products:", error);

@@ -124,7 +124,7 @@
         >
           <p class="font-medium text-monday-gray">
             Showing {{ startIndex + 1 }}-{{ endIndex }} of
-            {{ filteredProducts.length }} products
+            {{ totalFilteredProducts }} products
           </p>
           <div class="flex items-center gap-2">
             <button
@@ -260,6 +260,8 @@ export default {
       return products.value;
     });
 
+    const totalFilteredProducts = computed(() => filteredProducts.value.length);
+
     const totalPages = computed(() =>
       Math.ceil(filteredProducts.value.length / itemsPerPage.value),
     );
@@ -352,6 +354,7 @@ export default {
       loading,
       error,
       filteredProducts: paginatedProducts,
+      totalFilteredProducts,
       totalPages,
       startIndex,
       endIndex,
