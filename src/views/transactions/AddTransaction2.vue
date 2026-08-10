@@ -281,6 +281,22 @@
             />
           </button>
         </div>
+        <label
+          v-if="!loadingProducts && availableProducts.length > 0"
+          class="flex items-center gap-2 h-14 rounded-2xl border border-monday-border px-4 shrink-0"
+        >
+          <img
+            src="@/assets/images/icons/search-normal-black.svg"
+            class="size-5 flex shrink-0 opacity-60"
+            alt="icon"
+          />
+          <input
+            v-model="productSearch"
+            type="text"
+            placeholder="Search product by name or category"
+            class="w-full min-w-0 font-medium outline-none placeholder:text-monday-gray"
+          />
+        </label>
         <div
           class="modal-content flex flex-1 overflow-y-auto overscroll-contain hide-scrollbar"
         >
@@ -334,10 +350,25 @@
               </p>
             </div>
 
+            <!-- Search Empty State -->
+            <div
+              v-else-if="filteredProducts.length === 0"
+              class="flex flex-col items-center justify-center py-12 gap-3"
+            >
+              <img
+                src="@/assets/images/icons/document-text-grey.svg"
+                class="size-[52px]"
+                alt="icon"
+              />
+              <p class="font-semibold text-monday-gray">
+                No products match "{{ productSearch }}".
+              </p>
+            </div>
+
             <!-- Products List -->
             <div
               v-else
-              v-for="product in availableProducts"
+              v-for="product in filteredProducts"
               :key="product.id"
               class="card-assign flex flex-col rounded-3xl border border-monday-border p-4 gap-5"
               :class="{ 'opacity-50': product.stock <= 0 }"
@@ -882,6 +913,19 @@ const scanHistory = ref([]);
 const scannerStatus = ref("idle");
 
 const availableProducts = ref([]);
+const productSearch = ref("");
+
+const filteredProducts = computed(() => {
+  const query = productSearch.value.trim().toLowerCase();
+  if (!query) return availableProducts.value;
+
+  return availableProducts.value.filter((product) => {
+    return (
+      product.name?.toLowerCase().includes(query) ||
+      product.category?.toLowerCase().includes(query)
+    );
+  });
+});
 
 const totalItems = computed(() => transactionStore.totalItems);
 const totalAmount = computed(() => transactionStore.totalAmount);
@@ -894,7 +938,7 @@ const fetchMerchantProducts = async () => {
     loadingProducts.value = true;
 
     const response = await getMerchantProducts(
-      `?merchantId=${customerInfo.value.merchantId}`,
+      `?merchantId=${customerInfo.value.merchantId}&pageSize=1000`,
     );
 
     if (response.data) {
@@ -1229,10 +1273,12 @@ const addScannedProduct = () => {
 
 const closeAssignModal = () => {
   showAssignModal.value = false;
+  productSearch.value = "";
 };
 
 const openAssignModal = async () => {
   showAssignModal.value = true;
+  productSearch.value = "";
 
   if (availableProducts.value.length === 0) {
     await fetchMerchantProducts();

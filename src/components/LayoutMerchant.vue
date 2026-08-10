@@ -488,11 +488,15 @@ export default {
   computed: {
     currentUser() {
       const user = this.authStore.currentUser;
-      const roles = user.roles.split(",");
+      if (!user) return user;
+
+      const roles = (user.roles || "")
+        .split(",")
+        .map((role) => role.trim().toUpperCase());
       const priority = ["MANAGER", "KEEPER", "USER"];
       const displayRole = priority.find((role) => roles.includes(role));
-      user.roles = displayRole;
-      return user;
+
+      return { ...user, roles: displayRole || user.roles };
     },
   },
 

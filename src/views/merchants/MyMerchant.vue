@@ -180,6 +180,45 @@
             </p>
           </div>
         </div>
+        <div
+          v-if="!loadingProducts && merchantProducts.length > 0"
+          class="flex items-center justify-between px-[18px] py-4"
+        >
+          <p class="font-medium text-monday-gray">
+            Showing {{ startIndex + 1 }}-{{ endIndex }} of
+            {{ pagination.totalRecords }} products
+          </p>
+          <div class="flex items-center gap-2">
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <button
+              v-for="page in pagination.totalPages"
+              :key="page"
+              @click="goToPage(page)"
+              :disabled="page === currentPage"
+              :class="[
+                'px-4 py-2 rounded-2xl font-semibold transition-300',
+                page === currentPage
+                  ? 'bg-monday-blue text-white'
+                  : 'bg-monday-gray-background text-monday-gray hover:bg-monday-border',
+              ]"
+            >
+              {{ page }}
+            </button>
+            <button
+              @click="nextPage"
+              :disabled="currentPage === pagination.totalPages"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </section>
       <div
         v-else-if="showEmptyState"
@@ -267,7 +306,7 @@
 import LayoutMerchant from "@/components/LayoutMerchant.vue";
 import { getMerchantProducts } from "@/js/api/merchants";
 import { useAuthStore } from "@/stores/auth";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const authStore = useAuthStore();
 
@@ -279,6 +318,24 @@ const loadingProducts = ref(false);
 const showModal = ref(false);
 const showEmptyState = ref(false);
 const selectedProduct = ref({});
+
+const currentPage = ref(1);
+const itemsPerPage = ref(10);
+const pagination = ref({
+  currentPage: 1,
+  totalPages: 1,
+  totalRecords: 0,
+  limit: 10,
+  hasNext: false,
+  hasPrev: false,
+});
+
+const startIndex = computed(
+  () => (pagination.value.currentPage - 1) * itemsPerPage.value,
+);
+const endIndex = computed(() =>
+  Math.min(startIndex.value + itemsPerPage.value, pagination.value.totalRecords),
+);
 
 const fetchMerchants = async () => {
   try {
@@ -309,9 +366,18 @@ const fetchMerchantProducts = async (merchantId) => {
   try {
     loadingProducts.value = true;
 
-    const response = await getMerchantProducts(`?merchantId=${merchantId}`);
+    const response = await getMerchantProducts(
+      `?merchantId=${merchantId}&pageNumber=${currentPage.value - 1}&pageSize=${itemsPerPage.value}`,
+    );
     merchantProducts.value = response.data ? response.data.content : [];
-    console.log("Merchant products:", merchantProducts.value);
+    pagination.value = {
+      currentPage: (response.data?.page ?? 0) + 1,
+      totalPages: response.data?.totalPages || 1,
+      totalRecords: response.data?.totalElements || 0,
+      limit: response.data?.size || itemsPerPage.value,
+      hasNext: response.data?.hasNext || false,
+      hasPrev: response.data?.hasPrev || false,
+    };
   } catch (error) {
     console.error("Error fetching merchant products:", error);
     merchantProducts.value = [];
@@ -322,11 +388,33 @@ const fetchMerchantProducts = async (merchantId) => {
 
 const selectMerchant = async (merchant) => {
   selectedMerchant.value = merchant;
+  currentPage.value = 1;
   await fetchMerchantProducts(merchant.id);
 };
 
 const refreshProducts = async () => {
   if (selectedMerchant.value) {
+    currentPage.value = 1;
+    await fetchMerchantProducts(selectedMerchant.value.id);
+  }
+};
+
+const goToPage = async (page) => {
+  if (!selectedMerchant.value) return;
+  currentPage.value = page;
+  await fetchMerchantProducts(selectedMerchant.value.id);
+};
+
+const nextPage = async () => {
+  if (currentPage.value < pagination.value.totalPages) {
+    currentPage.value++;
+    await fetchMerchantProducts(selectedMerchant.value.id);
+  }
+};
+
+const previousPage = async () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
     await fetchMerchantProducts(selectedMerchant.value.id);
   }
 };
