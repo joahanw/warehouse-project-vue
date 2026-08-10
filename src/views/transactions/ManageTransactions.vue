@@ -15,7 +15,8 @@
           >
             <img
               :src="
-                merchantInfo?.photo || '@/assets/images/thumbnails/merchant-1.png'
+                merchantInfo?.photo ||
+                '@/assets/images/thumbnails/merchant-1.png'
               "
               class="size-full object-contain"
               alt="icon"
@@ -55,7 +56,10 @@
         id="Products"
         class="flex flex-col gap-6 flex-1 rounded-3xl p-[18px] px-0 bg-white"
       >
-        <div id="Header" class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]">
+        <div
+          id="Header"
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-[18px]"
+        >
           <div class="flex flex-col gap-[6px]">
             <p class="flex items-center gap-[6px]">
               <img
@@ -64,7 +68,7 @@
                 alt="icon"
               />
               <span class="font-semibold text-2xl"
-                >{{ transactions.length || 0 }} Total Transactions</span
+                >{{ pagination.totalRecords }} Total Transactions</span
               >
             </p>
             <p class="font-semibold text-lg text-monday-gray">
@@ -97,7 +101,7 @@
             <p class="font-semibold text-xl">All Transactions</p>
             <div class="flex items-center gap-2">
               <button
-                @click="fetchTransactions"
+                @click="fetchTransactions(1)"
                 class="btn btn-primary-opacity font-semibold"
               >
                 Refresh
@@ -105,9 +109,21 @@
             </div>
           </div>
 
+          <div v-if="isLoading" class="flex items-center justify-center py-12">
+            <div class="flex items-center gap-3">
+              <img
+                src="@/assets/images/icons/loading.svg"
+                class="size-6 animate-spin"
+                alt="loading"
+              />
+              <span class="font-semibold text-lg">Loading transactions...</span>
+            </div>
+          </div>
+
           <div
             v-for="(transaction, index) in transactions"
             :key="transaction.id"
+            v-show="!isLoading"
             class="card-merchant flex flex-col rounded-2xl border border-monday-border"
           >
             <div class="flex flex-col gap-5 p-4 pb-5">
@@ -128,38 +144,42 @@
                   {{ getPaymentStatusBadge(transaction.paymentStatus).label }}
                 </span>
               </div>
-              <div class="flex items-center justify-between gap-3">
-                <div
-                  class="flex size-[86px] rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-                >
-                  <img
-                    src="@/assets/images/icons/user-thin-grey.svg"
-                    class="flex size-[42px] shrink-0"
-                    alt="icon"
-                  />
-                </div>
-                <div class="flex flex-col gap-2 flex-1">
-                  <p class="font-semibold text-xl">{{ transaction.name }}</p>
-                  <p
-                    class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div
+                    class="flex size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                   >
                     <img
-                      src="@/assets/images/icons/call-grey.svg"
-                      class="size-6 flex shrink-0"
+                      src="@/assets/images/icons/user-thin-grey.svg"
+                      class="flex size-[42px] shrink-0"
                       alt="icon"
                     />
-                    <span>{{ transaction.phone }}</span>
-                  </p>
+                  </div>
+                  <div class="flex flex-col gap-2 min-w-0 flex-1">
+                    <p class="font-semibold text-xl truncate">
+                      {{ transaction.name }}
+                    </p>
+                    <p
+                      class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+                    >
+                      <img
+                        src="@/assets/images/icons/call-grey.svg"
+                        class="size-6 flex shrink-0"
+                        alt="icon"
+                      />
+                      <span>{{ transaction.phone }}</span>
+                    </p>
+                  </div>
                 </div>
                 <div
                   v-if="canConfirmPayment(transaction)"
-                  class="flex items-center gap-2 shrink-0"
+                  class="flex items-center gap-2 w-full sm:w-auto sm:shrink-0"
                 >
                   <button
                     type="button"
                     @click="openConfirmDialog(transaction, 'failed')"
                     :disabled="confirmingId === transaction.id"
-                    class="flex items-center gap-1.5 rounded-full bg-monday-red/10 text-monday-red px-3.5 py-2 font-semibold text-sm ring-1 ring-inset ring-monday-red/20 transition-all duration-200 hover:bg-monday-red hover:text-white hover:ring-monday-red active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+                    class="flex flex-1 sm:flex-initial items-center justify-center gap-1.5 rounded-full bg-monday-red/10 text-monday-red px-3.5 py-2 font-semibold text-sm text-nowrap ring-1 ring-inset ring-monday-red/20 transition-all duration-200 hover:bg-monday-red hover:text-white hover:ring-monday-red active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     <svg
                       class="size-4 shrink-0"
@@ -181,7 +201,7 @@
                     type="button"
                     @click="openConfirmDialog(transaction, 'success')"
                     :disabled="confirmingId === transaction.id"
-                    class="flex items-center gap-1.5 rounded-full bg-monday-blue/10 text-monday-blue px-3.5 py-2 font-semibold text-sm ring-1 ring-inset ring-monday-blue/20 transition-all duration-200 hover:bg-monday-blue hover:text-white hover:ring-monday-blue active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+                    class="flex flex-1 sm:flex-initial items-center justify-center gap-1.5 rounded-full bg-monday-blue/10 text-monday-blue px-3.5 py-2 font-semibold text-sm text-nowrap ring-1 ring-inset ring-monday-blue/20 transition-all duration-200 hover:bg-monday-blue hover:text-white hover:ring-monday-blue active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
                   >
                     <svg
                       class="size-4 shrink-0"
@@ -236,7 +256,9 @@
                   <div
                     class="card flex flex-col xl:flex-row gap-4 xl:gap-3 xl:items-center xl:justify-between"
                   >
-                    <div class="flex items-center gap-3 w-full xl:w-[420px] xl:shrink-0">
+                    <div
+                      class="flex items-center gap-3 w-full xl:w-[420px] xl:shrink-0"
+                    >
                       <div
                         class="flex size-16 xl:size-[86px] shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
                       >
@@ -250,7 +272,9 @@
                         <p class="font-semibold text-lg xl:text-xl truncate">
                           {{ product.product.name }}
                         </p>
-                        <p class="font-semibold text-lg xl:text-xl text-monday-blue">
+                        <p
+                          class="font-semibold text-lg xl:text-xl text-monday-blue"
+                        >
                           Rp {{ formaterNumber(product.product.price) }}
                           <span class="text-monday-gray"
                             >({{ product.quantity }}x)</span
@@ -304,7 +328,7 @@
             </div>
           </div>
           <div
-            v-if="transactions.length === 0"
+            v-if="!isLoading && transactions.length === 0"
             class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
@@ -315,6 +339,45 @@
             <p class="font-semibold text-monday-gray">
               Oops, it looks like there's no data yet.
             </p>
+          </div>
+        </div>
+        <div
+          v-if="!isLoading && transactions.length > 0"
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-[18px] py-4"
+        >
+          <p class="font-medium text-monday-gray">
+            Showing {{ startIndex + 1 }}-{{ endIndex }} of
+            {{ pagination.totalRecords }} transactions
+          </p>
+          <div class="flex flex-wrap items-center gap-2">
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <button
+              v-for="page in pagination.totalPages"
+              :key="page"
+              @click="goToPage(page)"
+              :disabled="page === currentPage"
+              :class="[
+                'px-4 py-2 rounded-2xl font-semibold transition-300',
+                page === currentPage
+                  ? 'bg-monday-blue text-white'
+                  : 'bg-monday-gray-background text-monday-gray hover:bg-monday-border',
+              ]"
+            >
+              {{ page }}
+            </button>
+            <button
+              @click="nextPage"
+              :disabled="currentPage === pagination.totalPages"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
           </div>
         </div>
       </section>
@@ -459,7 +522,8 @@
                 akan ditandai sebagai
                 <span class="font-semibold">{{
                   confirmDialog.status === "success" ? "Success" : "Failed"
-                }}</span>. Tindakan ini tidak dapat dibatalkan.
+                }}</span
+                >. Tindakan ini tidak dapat dibatalkan.
               </p>
             </div>
             <div class="flex items-center gap-3 w-full">
@@ -476,9 +540,7 @@
                 @click="submitConfirmDialog"
                 :disabled="isConfirming"
                 :class="
-                  confirmDialog.status === 'success'
-                    ? 'btn-primary'
-                    : 'btn-red'
+                  confirmDialog.status === 'success' ? 'btn-primary' : 'btn-red'
                 "
                 class="btn font-semibold flex-1 justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -509,6 +571,28 @@ import arrowCircleUpIcon from "@/assets/images/icons/arrow-circle-up.svg";
 const authStore = useAuthStore();
 
 const transactions = ref([]);
+const isLoading = ref(false);
+
+const currentPage = ref(1);
+const itemsPerPage = ref(10);
+const pagination = ref({
+  currentPage: 1,
+  totalPages: 1,
+  totalRecords: 0,
+  limit: 10,
+  hasNext: false,
+  hasPrev: false,
+});
+
+const startIndex = computed(
+  () => (pagination.value.currentPage - 1) * itemsPerPage.value,
+);
+const endIndex = computed(() =>
+  Math.min(
+    startIndex.value + itemsPerPage.value,
+    pagination.value.totalRecords,
+  ),
+);
 
 const expandedSections = ref([]);
 const showModal = ref(false);
@@ -528,16 +612,45 @@ const merchantInfo = computed(() => {
   return null;
 });
 
-const fetchTransactions = async () => {
+const fetchTransactions = async (page = 1) => {
   try {
+    isLoading.value = true;
+    currentPage.value = page;
+
     const merchantId = merchantInfo.value?.id;
     const response = await getTransactions(
-      `?merchantId=${merchantId}&sortDirection=desc&sortBy=id`,
+      `?merchantId=${merchantId}&sortBy=createdAt&sortDirection=desc&pageNumber=${page - 1}&pageSize=${itemsPerPage.value}`,
     );
     transactions.value = response.data.content || [];
+    pagination.value = {
+      currentPage: (response.data?.page ?? 0) + 1,
+      totalPages: response.data?.totalPages || 1,
+      totalRecords: response.data?.totalElements || 0,
+      limit: response.data?.size || itemsPerPage.value,
+      hasNext: response.data?.hasNext || false,
+      hasPrev: response.data?.hasPrev || false,
+    };
   } catch (error) {
     console.error("Error fetching transactions:", error);
     transactions.value = [];
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const goToPage = (page) => {
+  fetchTransactions(page);
+};
+
+const nextPage = () => {
+  if (currentPage.value < pagination.value.totalPages) {
+    fetchTransactions(currentPage.value + 1);
+  }
+};
+
+const previousPage = () => {
+  if (currentPage.value > 1) {
+    fetchTransactions(currentPage.value - 1);
   }
 };
 

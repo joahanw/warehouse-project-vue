@@ -120,13 +120,13 @@
 
         <div
           v-if="filteredProducts.length > 0"
-          class="flex items-center justify-between px-[18px] py-4"
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-[18px] py-4"
         >
           <p class="font-medium text-monday-gray">
             Showing {{ startIndex + 1 }}-{{ endIndex }} of
             {{ totalFilteredProducts }} products
           </p>
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2">
             <button
               @click="previousPage"
               :disabled="currentPage === 1"

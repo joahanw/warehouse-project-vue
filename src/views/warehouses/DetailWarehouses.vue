@@ -7,33 +7,35 @@
     <main class="flex flex-col gap-6 flex-1">
       <section
         id="Warehouse-Info"
-        class="flex items-center justify-between rounded-3xl p-[18px] gap-3 bg-white"
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-3xl p-[18px] gap-3 bg-white"
       >
-        <div
-          class="flex size-16 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
-        >
-          <img
-            :src="warehouse.photo || defaultGalleryIcon"
-            class="size-full object-contain"
-            alt="icon"
-          />
-        </div>
-        <div class="flex flex-col gap-2 flex-1">
-          <p class="font-semibold text-lg">{{ warehouse.name }}</p>
-          <p
-            class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+        <div class="flex items-center gap-3 min-w-0">
+          <div
+            class="flex size-16 shrink-0 rounded-2xl bg-monday-background items-center justify-center overflow-hidden"
           >
             <img
-              src="@/assets/images/icons/call-grey.svg"
-              class="size-6 flex shrink-0"
+              :src="warehouse.photo || defaultGalleryIcon"
+              class="size-full object-contain"
               alt="icon"
             />
-            <span>{{ warehouse.phone }}</span>
-          </p>
+          </div>
+          <div class="flex flex-col gap-2 min-w-0 flex-1">
+            <p class="font-semibold text-lg truncate">{{ warehouse.name }}</p>
+            <p
+              class="flex items-center gap-1 font-medium text-lg text-monday-gray"
+            >
+              <img
+                src="@/assets/images/icons/call-grey.svg"
+                class="size-6 flex shrink-0"
+                alt="icon"
+              />
+              <span>{{ warehouse.phone }}</span>
+            </p>
+          </div>
         </div>
         <router-link
           :to="`/edit-warehouses/${warehouse.id}`"
-          class="btn btn-black w-[174px] font-semibold text-nowrap"
+          class="btn btn-black w-full sm:w-[174px] justify-center font-semibold text-nowrap"
         >
           Edit Warehouse
         </router-link>
