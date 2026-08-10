@@ -79,7 +79,7 @@
                 alt="icon"
               />
               <span class="font-semibold text-2xl"
-                >{{ products.length }} Total Products</span
+                >{{ pagination.totalRecords }} Total Products</span
               >
             </p>
             <p class="font-semibold text-lg text-monday-gray">
@@ -201,8 +201,9 @@
             </template>
           </div>
           <div
+            v-else-if="!isLoadingProducts"
             id="Empty-State"
-            class="hidden flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
+            class="flex flex-col flex-1 items-center justify-center rounded-[20px] border-dashed border-2 border-monday-gray gap-6"
           >
             <img
               src="@/assets/images/icons/document-text-grey.svg"
@@ -212,6 +213,45 @@
             <p class="font-semibold text-monday-gray">
               Oops, it looks like there's no data yet.
             </p>
+          </div>
+        </div>
+        <div
+          v-if="!isLoadingProducts && products.length > 0"
+          class="flex items-center justify-between px-[18px] py-4"
+        >
+          <p class="font-medium text-monday-gray">
+            Showing {{ startIndex + 1 }}-{{ endIndex }} of
+            {{ pagination.totalRecords }} products
+          </p>
+          <div class="flex items-center gap-2">
+            <button
+              @click="previousPage"
+              :disabled="currentPage === 1"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <button
+              v-for="page in pagination.totalPages"
+              :key="page"
+              @click="goToPage(page)"
+              :disabled="page === currentPage"
+              :class="[
+                'px-4 py-2 rounded-2xl font-semibold transition-300',
+                page === currentPage
+                  ? 'bg-monday-blue text-white'
+                  : 'bg-monday-gray-background text-monday-gray hover:bg-monday-border',
+              ]"
+            >
+              {{ page }}
+            </button>
+            <button
+              @click="nextPage"
+              :disabled="currentPage === pagination.totalPages"
+              class="btn btn-primary-opacity font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
           </div>
         </div>
       </section>
@@ -333,7 +373,28 @@ export default {
       isLoading: false,
       isLoadingKeeper: false,
       isLoadingProducts: false,
+      currentPage: 1,
+      itemsPerPage: 10,
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalRecords: 0,
+        limit: 10,
+        hasNext: false,
+        hasPrev: false,
+      },
     };
+  },
+  computed: {
+    startIndex() {
+      return (this.pagination.currentPage - 1) * this.itemsPerPage;
+    },
+    endIndex() {
+      return Math.min(
+        this.startIndex + this.itemsPerPage,
+        this.pagination.totalRecords,
+      );
+    },
   },
   async created() {
     await this.loadMerchantDetails();
@@ -372,18 +433,40 @@ export default {
     async loadMerchantProducts(page = 1) {
       if (!this.merchant.id) return;
 
+      this.currentPage = page;
       this.isLoadingProducts = true;
       try {
-        const query =
-          page > 1
-            ? `?pageNumber=${page}&merchantId=${this.merchant.id}`
-            : `?merchantId=${this.merchant.id}`;
+        const query = `?merchantId=${this.merchant.id}&pageNumber=${page - 1}&pageSize=${this.itemsPerPage}`;
         const response = await getMerchantProducts(query);
         this.products = response.data?.content || [];
+        this.pagination = {
+          currentPage: (response.data?.page ?? 0) + 1,
+          totalPages: response.data?.totalPages || 1,
+          totalRecords: response.data?.totalElements || 0,
+          limit: response.data?.size || this.itemsPerPage,
+          hasNext: response.data?.hasNext || false,
+          hasPrev: response.data?.hasPrev || false,
+        };
       } catch (error) {
         console.error("Error loading merchant products:", error);
       } finally {
         this.isLoadingProducts = false;
+      }
+    },
+
+    goToPage(page) {
+      this.loadMerchantProducts(page);
+    },
+
+    nextPage() {
+      if (this.currentPage < this.pagination.totalPages) {
+        this.loadMerchantProducts(this.currentPage + 1);
+      }
+    },
+
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.loadMerchantProducts(this.currentPage - 1);
       }
     },
 
