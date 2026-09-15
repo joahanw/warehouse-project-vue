@@ -233,9 +233,10 @@ const formData = reactive({
 const phoneNumberModel = computed({
   get: () => formData.phoneNumber,
   set: (value) => {
-    formData.phoneNumber = value.startsWith("0")
-      ? `62${value.slice(1)}`
-      : value;
+    const digitsOnly = String(value ?? "").replace(/\D/g, "");
+    formData.phoneNumber = digitsOnly.startsWith("0")
+      ? `62${digitsOnly.slice(1)}`
+      : digitsOnly;
   },
 });
 

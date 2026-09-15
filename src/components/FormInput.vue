@@ -20,7 +20,8 @@
       class="appearance-none w-full h-[72px] font-semibold text-lg rounded-3xl border-[1.5px] border-monday-border pl-20 pr-6 pb-[14.5px] pt-[34.5px] placeholder-shown:pt-[14.5px] focus:border-monday-black transition-300"
       placeholder=""
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      :inputmode="type === 'tel' ? 'numeric' : null"
+      @input="handleInput"
       :required="required"
       :maxlength="maxLength"
       :min="min"
@@ -76,5 +77,20 @@ export default {
     },
   },
   emits: ["update:modelValue"],
+  methods: {
+    handleInput(event) {
+      // Phone numbers must contain digits only: strip spaces and any symbol
+      // (+, -, (), .) as the user types or pastes.
+      if (this.type === "tel") {
+        const digitsOnly = event.target.value.replace(/\D/g, "");
+        if (event.target.value !== digitsOnly) {
+          event.target.value = digitsOnly;
+        }
+        this.$emit("update:modelValue", digitsOnly);
+        return;
+      }
+      this.$emit("update:modelValue", event.target.value);
+    },
+  },
 };
 </script>
