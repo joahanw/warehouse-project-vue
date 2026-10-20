@@ -111,6 +111,7 @@ export const useTransactionsSummary = (merchantId, options = {}) => {
       "Phone",
       "Payment Method",
       "Products",
+      "Shipping Cost",
       "Grand Total",
       "Status",
     ];
@@ -125,6 +126,7 @@ export const useTransactionsSummary = (merchantId, options = {}) => {
         transaction.phone || "-",
         formatLabel(transaction.paymentMethod),
         transaction.transactionProducts?.length || 0,
+        Number(transaction.shippingCost) || 0,
         transaction.grandTotal || 0,
         getPaymentStatusBadge(transaction.paymentStatus).label,
       ];
