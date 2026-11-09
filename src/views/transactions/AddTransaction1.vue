@@ -116,7 +116,7 @@
             type="date"
             :min="todayDate"
           />
-          <FormInput
+          <FormTextarea
             v-model="formData.notes"
             label="Notes"
             :icon="note2GreyIcon"
