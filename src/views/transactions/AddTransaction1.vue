@@ -120,7 +120,6 @@
             v-model="formData.notes"
             label="Notes"
             :icon="note2GreyIcon"
-            required="true"
           />
           <FormTextarea
             v-model="formData.address"

@@ -457,7 +457,7 @@ const prepareTransactionData = () => {
     email: customerInfo.value.email,
     address: customerInfo.value.address,
     merchantId: customerInfo.value.merchantId,
-    notes: customerInfo.value.notes?.replace(/\n\s*\n/g, "\n").trim(),
+    notes: customerInfo.value.notes?.replace(/\n\s*\n/g, "\n").trim() || "-",
     shippingCost: customerInfo.value.shippingCost,
     deliveryDate: customerInfo.value.deliveryDate,
     products: products,
