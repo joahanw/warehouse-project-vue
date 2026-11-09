@@ -114,6 +114,7 @@ export const useTransactionsSummary = (merchantId, options = {}) => {
       "Shipping Cost",
       "Grand Total",
       "Status",
+      "Notes",
     ];
 
     const rows = sortedTransactions.value.map((transaction, index) => {
@@ -129,6 +130,7 @@ export const useTransactionsSummary = (merchantId, options = {}) => {
         Number(transaction.shippingCost) || 0,
         transaction.grandTotal || 0,
         getPaymentStatusBadge(transaction.paymentStatus).label,
+        transaction.notes || "-",
       ];
     });
 
